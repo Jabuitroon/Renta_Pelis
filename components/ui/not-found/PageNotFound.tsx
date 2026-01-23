@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Film, Home, Search, Clapperboard, Play } from 'lucide-react'
+import { Film, Home, Search, Clapperboard} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function NotFound404() {
