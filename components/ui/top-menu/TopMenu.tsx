@@ -2,7 +2,7 @@ import { montserratAlternates } from '@/config/fonts'
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
 import Link from 'next/link'
 
-export const TopMenu = () => {
+export default function TopMenu() {
   return (
     <nav className='h-12 w-full flex px-5 justify-between items-center bg-periwinkle-700'>
       <div>

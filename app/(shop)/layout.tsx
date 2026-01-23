@@ -1,4 +1,4 @@
-import { TopMenu } from "@/components"
+import TopMenu from '@/components/ui/top-menu/TopMenu'
 
 export default function ShopLayout({
   children,
@@ -6,7 +6,7 @@ export default function ShopLayout({
   children: React.ReactNode
 }>) {
   return (
-    <main className='flex flex-col min-h-screen items-center justify-center bg-red-500 font-sans dark:bg-black'>
+    <main className='flex flex-col h-screen items-center justify-center bg-red-500 font-sans dark:bg-black'>
       <TopMenu />
       {children}
     </main>
