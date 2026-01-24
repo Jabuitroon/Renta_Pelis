@@ -22,12 +22,13 @@ export default function SideUserMenu({
       <div className='grid grid-cols-2 grid-rows-5 gap-2 p-8 z-50'>
         <h2 className='col-span-2 text-primary text-2xl z-50'>Géneros</h2>
         {categories.map((category) => (
-          <div
+          <a
+            href={`/category/${category.toLocaleLowerCase()}`}
             key={category}
             className='p-2 rounded-lg border-gray-300 dark:border-gray-700 hover:bg-white hover:text-black transition-colors flex justify-center items-center z-50'
           >
             {category}
-          </div>
+          </a>
         ))}
       </div>
     </aside>

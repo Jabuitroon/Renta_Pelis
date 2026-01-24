@@ -21,5 +21,6 @@ export interface Rating {
   Value: string
 }
 
+export type Genres = 'Acción y aventuras'| 'Anime'| 'Drama'| 'Documental'| 'Fantasía'| 'Romance'| 'Comedia'| 'Horror'|'Niños'| 'Ciencia ficción'| 'Misterio'| 'Thriller'
 export type RentState = 'available' | 'reserved' | 'unavailable'
 
