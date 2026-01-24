@@ -6,45 +6,38 @@ import { Genres } from '@/interfaces/movie'
 const seedMovies = initialData.movies
 
 interface Props {
-  params: { id: Genres }
+  params: { id: string }
 }
 
-const labels: Record<Genres, string> = {
-  'Acción y aventuras': 'Acción y aventuras',
-  Anime: 'Anime',
-  Drama: 'Drama',
-  Documental: 'Documental',
-  Fantasía: 'Fantasía',
-  Romance: 'Romance',
-  Comedia: 'Comedia',
-  Horror: 'Horror',
-  Niños: 'Niños',
-  'Ciencia ficción': 'Ciencia ficción',
-  Misterio: 'Misterio',
-  Thriller: 'Thriller',
+export const genreSlugMap: Record<string, Genres> = {
+  'accion-y-aventuras': 'Acción y Aventuras',
+  anime: 'Anime',
+  drama: 'Drama',
+  documental: 'Documental',
+  fantasia: 'Fantasía',
+  romance: 'Romance',
+  comedia: 'Comedia',
+  horror: 'Horror',
+  ninos: 'Niños',
+  'ciencia-ficcion': 'Ciencia ficción',
+  misterio: 'Misterio',
+  thriller: 'Thriller',
 }
 
-export default function CategoryPage({ params }: Props) {
-  const { id } = params
+export default async function CategoryPage({ params }: Props) {
+  const { id } = await params
 
-  if (!labels[id]) {
+  const genre = genreSlugMap[id]
+
+  if (!genre) {
     notFound()
   }
 
-  const moviesToShow = seedMovies.filter(
-    movie => movie.Genre === id // o includes si es array
-  )
+  const moviesToShow = seedMovies.filter((movie) => movie.Genre.includes(genre))
 
   return (
-    <div className='flex min-h-full flex-col items-center justify-center bg-blue-500 dark:bg-gray-900'>
-      <h1 className='mb-4 text-4xl font-bold text-white'>
-        {labels[id]}
-      </h1>
-
-      <MoviesGrid
-        header={`Películas de ${labels[id]}`}
-        movies={moviesToShow}
-      />
+    <div className='flex flex-col w-full h-full overflow-y-auto scroll-smooth snap-y bg-accent-foreground font-sans dark:bg-gray-900'>
+      <MoviesGrid header={`Películas de ${genre}`} movies={moviesToShow} />
     </div>
   )
 }
