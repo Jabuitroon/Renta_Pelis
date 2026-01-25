@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
-import { initialData } from '@/seed/seed'
 import MoviesGrid from '@/components/movies/products-grid/MoviesGrid'
 import { Genres } from '@/interfaces/movie'
+import { fetchMovies } from '@/lib/tmdb'
 
-const seedMovies = initialData.movies
+// const seedMovies = initialData.movies
 
 interface Props {
   params: { id: string }
@@ -25,15 +25,14 @@ export const genreSlugMap: Record<string, Genres> = {
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const { id } = await params
-
-  const genre = genreSlugMap[id]
+  const moviesToSearch = await fetchMovies({ query: params.id })
+  const genre = genreSlugMap[params.id]
 
   if (!genre) {
     notFound()
   }
 
-  const moviesToShow = seedMovies.filter((movie) => movie.Genre.includes(genre))
+  const moviesToShow = moviesToSearch.filter((movie) => movie.Genre.includes(genre))
 
   return (
     <div className='flex flex-col w-full h-full overflow-y-auto scroll-smooth snap-y bg-accent-foreground font-sans dark:bg-gray-900'>
