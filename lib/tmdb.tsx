@@ -1,7 +1,7 @@
 const key = 'a5be40fb'
 
 export async function fetchMovies({ query, page }: { query: string; page?: string }) {
-  const url = `https://www.omdbapi.com/?apikey=${key}&s=drama&type=movie&page=${page || '1'}`
+  const url = `https://www.omdbapi.com/?apikey=${key}&s=${query}&type=movie&page=${page || '1'}`
 
   const res = await fetch(url, {
     next: { revalidate: 3600 },
@@ -43,7 +43,7 @@ export async function fetchMovies({ query, page }: { query: string; page?: strin
 // }
 
 export async function fetchMoviesId({ id }: { id: string }) {
-  const url = `https://www.omdbapi.com/?apikey=${key}i=${id}`
+  const url = `https://www.omdbapi.com/?apikey=${key}&i=${id}`
 
   const res = await fetch(url, {
     next: { revalidate: 3600 },

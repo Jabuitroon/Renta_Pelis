@@ -1,12 +1,16 @@
 'use client'
 import { useCallback } from 'react'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useDebouncedCallback } from 'use-debounce'
 import Link from 'next/link'
 import { montserratAlternates } from '@/config/fonts'
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
 import { CgMenuGridO } from 'react-icons/cg'
 import { isDesktop } from '@/utils/isDesktop'
 import { useUiStore } from '@/store/ui/ui-store'
+
 export default function TopMenu() {
+  // Controladores de estado para el menú lateral
   const open = useUiStore((s) => s.openSideMenu)
   const toggle = useUiStore((s) => s.toggleSideMenu)
 
@@ -17,6 +21,21 @@ export default function TopMenu() {
   const handleClick = useCallback(() => {
     if (!isDesktop()) toggle()
   }, [toggle])
+
+  // Búsqueda
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const { replace } = useRouter()
+
+  const handleSearch = useDebouncedCallback((term) => {
+    const params = new URLSearchParams(searchParams)
+    if (term) {
+      params.set('query', term)
+    } else {
+      params.delete('query')
+    }
+    replace(`${pathname}?${params.toString()}`)
+  }, 300)
   return (
     <nav className='flex h-12 w-full px-10 justify-between items-center bg-accent'>
       <div>
@@ -76,8 +95,11 @@ export default function TopMenu() {
             type='search'
             id='search'
             className='block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body'
-            placeholder='Search'
-            required
+            placeholder='Buscar películas, series...'
+            onChange={(e) => {
+              handleSearch(e.target.value)
+            }}
+            defaultValue={searchParams.get('query')?.toString()}
           />
           <button
             type='button'

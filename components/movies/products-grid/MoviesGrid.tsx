@@ -5,9 +5,11 @@ import { motion } from 'motion/react'
 export default function MoviesGrid({
   header,
   movies,
+  currentPage
 }: {
   header: string
   movies: Movie[]
+  currentPage?: number
 }) {
   const listVariants = {
     hidden: { opacity: 0 },
