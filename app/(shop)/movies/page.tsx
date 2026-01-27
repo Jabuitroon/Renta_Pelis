@@ -24,18 +24,11 @@ export default async function MoviesPage(props: {
   console.log('currentPage:', currentPage, 'pagesNeeded:', pagesNeeded)
 
   return (
-    <div className='flex flex-col w-full overflow-y-auto scroll-smooth snap-y bg-accent-foreground font-sans dark:bg-gray-900'>
+    <div className='w-full h-full overflow-y-auto scroll-smooth snap-y snap-mandatory bg-accent-foreground font-sans dark:bg-gray-900'>
       <HeroCarousel />
       <Suspense key={query + currentPage}>
-        <MoviesGrid
-          header='Available Movies'
-          movies={Search}
-          currentPage={currentPage}
-        />
+        <MoviesGrid header='Available Movies' movies={Search} totalPages={pagesNeeded} />
       </Suspense>
-      <div className='mt-5 flex w-full justify-center'>
-        {/* <Pagination totalPages={totalPages} /> */}
-      </div>
     </div>
   )
 }
