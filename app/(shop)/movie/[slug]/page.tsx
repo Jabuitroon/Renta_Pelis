@@ -5,9 +5,8 @@ import { Movie } from '@/interfaces/movie'
 import { Button } from '@/components/ui/button'
 import { Video, Plus, ThumbsUp, Share2, ArrowUpIcon } from 'lucide-react'
 import { ActionButton } from '@/components/ui/action-button/button'
-import { QualitySelector } from '@/components/movie/quality-selector'
-import { CounterRent } from '@/components/movie/counter-rent'
 import Badge from '@/components/ui/badges'
+import ModalRentSell from '@/components/movie/modal-rent-sell'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -56,24 +55,30 @@ export default async function MoviePage({ params }: Props) {
             <span className='font-semibold'>Actores:</span> {movie?.Actors}
           </p>
         </div>
+
         {/* Actions */}
         <footer className='flex flex-col gap-6 pt-4'>
           {/* Compra */}
           <div className='flex gap-4 flex-wrap'>
-            <Button className=' bg-gray-300 text-accent-foreground hover:text-white w-full sm:w-auto'>
+            <Button className=' bg-gray-300 text-xl text-accent-foreground hover:text-white w-full sm:w-auto h-12 grow'>
               Ver con Emirp <ArrowUpIcon />
             </Button>
-
-            <QualitySelector
-              availableQualities={{
+            <ModalRentSell
+              buttonSpan='Alquilar'
+              optionsSelector={{
                 '720p': 'COP 9,900',
                 '1080p': 'COP 19,900',
                 '4k': 'COP 29,900',
               }}
-              selectedQuality='720p'
             />
-
-            <CounterRent quantity={1} />
+            <ModalRentSell
+              buttonSpan='Comprar'
+              optionsSelector={{
+                '720p': 'COP 15,900',
+                '1080p': 'COP 30,900',
+                '4k': 'COP 45,900',
+              }}
+            />
           </div>
 
           {/* Acciones secundarias */}
