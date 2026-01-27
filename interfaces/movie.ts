@@ -22,6 +22,18 @@ export interface Rating {
   Value: string
 }
 
-export type Genres = 'Acción y Aventuras' | 'Anime' | 'Drama' | 'Documental' | 'Fantasía' | 'Romance' | 'Comedia' | 'Horror' | 'Niños' | 'Ciencia ficción' | 'Misterio' | 'Thriller'
+export type Genres =
+  | 'Acción y Aventuras'
+  | 'Anime'
+  | 'Drama'
+  | 'Documental'
+  | 'Fantasía'
+  | 'Romance'
+  | 'Comedia'
+  | 'Horror'
+  | 'Niños'
+  | 'Ciencia ficción'
+  | 'Misterio'
+  | 'Thriller'
 export type RentState = 'available' | 'reserved' | 'unavailable'
-
+export type QualityOption = '720p' | '1080p' | '4k'

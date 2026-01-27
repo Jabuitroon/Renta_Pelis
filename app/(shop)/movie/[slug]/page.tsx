@@ -5,6 +5,8 @@ import { Movie } from '@/interfaces/movie'
 import { Button } from '@/components/ui/button'
 import { Video, Plus, ThumbsUp, Share2, ArrowUpIcon } from 'lucide-react'
 import { ActionButton } from '@/components/ui/action-button/button'
+import { QualitySelector } from '@/components/movie/quality-selector'
+import { CounterRent } from '@/components/movie/counter-rent'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -53,6 +55,10 @@ export default async function MoviePage({ params }: Props) {
             >
               Ver con Emirp <ArrowUpIcon />
             </Button>
+            <QualitySelector availableQualities={{ '720p': 'COP 9,900', '1080p': 'COP 19,900', '4k': 'COP 29,900' }} selectedQuality='720p'/>
+
+            <CounterRent quantity={1} />
+            {/*
             <Button
               className='bg-gray-300 text-accent-foreground hover:text-white'
               aria-label='Submit'
@@ -92,6 +98,26 @@ export default async function MoviePage({ params }: Props) {
               icon={<Share2 className='w-5 h-5' />}
               label='Compartir'
             />
+            */}
+            <div className='flex items-center gap-3'>
+              <ActionButton
+                icon={<Video className='w-5 h-5' />}
+                label='Ver trailer'
+              />
+              <ActionButton
+                icon={<Plus className='w-6 h-6' />}
+                label='Mi lista'
+                active
+              />
+              <ActionButton
+                icon={<ThumbsUp className='w-5 h-5' />}
+                label='Me gusta'
+              />
+              <ActionButton
+                icon={<Share2 className='w-5 h-5' />}
+                label='Compartir'
+              />
+            </div>
           </div>
         </footer>
       </article>

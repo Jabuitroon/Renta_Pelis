@@ -27,7 +27,11 @@ export default async function MoviesPage(props: {
     <div className='w-full h-full overflow-y-auto scroll-smooth snap-y snap-mandatory bg-accent-foreground font-sans dark:bg-gray-900'>
       <HeroCarousel />
       <Suspense key={query + currentPage}>
-        <MoviesGrid header='Available Movies' movies={Search} totalPages={pagesNeeded} />
+        <MoviesGrid
+          header='Available Movies'
+          movies={Search}
+          totalPages={pagesNeeded}
+        />
       </Suspense>
     </div>
   )
