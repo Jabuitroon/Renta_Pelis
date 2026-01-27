@@ -44,7 +44,9 @@ export default async function MoviePage({ params }: Props) {
             <span>{movie?.Runtime}</span>
             <span>{movie?.Year}</span>
             {movie?.Genre.split(', ').map((genre) => (
-              <Badge key={genre} variant="info" size="sm">{genre}</Badge>
+              <Badge key={genre} variant='info' size='sm'>
+                {genre}
+              </Badge>
             ))}
           </div>
           <p className='text-sm sm:text-base'>
