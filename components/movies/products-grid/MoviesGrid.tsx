@@ -36,7 +36,7 @@ export default function MoviesGrid({
       initial='hidden'
       animate='visible'
       variants={listVariants}
-      className='snap-start px-8 md:px-16 py-12'
+      className='snap-start px-8 py-12'
     >
       <motion.h2 className='text-white text-xl font-semibold mb-6'>
         {header}

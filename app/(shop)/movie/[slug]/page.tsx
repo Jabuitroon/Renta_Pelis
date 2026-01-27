@@ -7,6 +7,7 @@ import { Video, Plus, ThumbsUp, Share2, ArrowUpIcon } from 'lucide-react'
 import { ActionButton } from '@/components/ui/action-button/button'
 import { QualitySelector } from '@/components/movie/quality-selector'
 import { CounterRent } from '@/components/movie/counter-rent'
+import Badge from '@/components/ui/badges'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -20,67 +21,61 @@ export default async function MoviePage({ params }: Props) {
   if (!movie) {
     notFound()
   }
-  console.log(movie)
 
   return (
-    <main className='flex h-full w-screen items-center justify-center bg-accent-foreground font-sans dark:bg-gray-900'>
-      <div>
+    <main className='flex flex-col h-screen w-full overflow-y-auto bg-accent-foreground font-sans dark:bg-gray-900 lg:flex-row lg:items-start lg:justify-center 2xl:gap-20 2xl:px-24'>
+      {/* Poster */}
+      <div className='w-full max-w-xs mx-auto p-4 sm:max-w-sm md:max-w-md lg:max-w-sm 2xl:max-w-lg'>
         <img
           src={movie?.Poster}
           alt={movie?.Title}
-          className='w-full h-full object-cover rounded-md'
-          width={200}
-          height={300}
+          className=' w-full object-cover rounded-xl shadow-lg'
         />
       </div>
 
-      <article className='flex flex-col md:w-4xl p-8 gap-4'>
-        <h1 className='mb-4 text-4xl font-bold text-white '>{movie?.Title}</h1>
-        <div>
-          <p className='text-lg text-white'>{movie?.Plot} </p>
-          <span className='text-white'> {movie?.Runtime}</span>
-          <span className='text-white'> {movie?.Year}</span>
-          <br />
-          <span className='text-white'>{movie?.Genre}</span>
-          <br />
-          <span className='text-white'>Director: {movie?.Director}</span>
-          <br />
-          <span className='text-white'>Actores: {movie?.Actors}</span>
+      {/* Info */}
+      <article className='flex flex-col gap-6 px-6 py-4 sm:px-8 md:max-w-3xl lg:max-w-4xl lg:py-12 2xl:max-w-5xl 2xl:gap-8'>
+        <h1 className='text-2xl font-bold text-white sm:text-3xl lg:text-4xl 2xl:text-5xl'>
+          {movie?.Title}
+        </h1>
+        <div className='space-y-2 text-white/90'>
+          <p className='text-base sm:text-lg 2xl:text-xl'>{movie?.Plot} </p>
+          <div className='flex flex-wrap gap-x-4 gap-y-1 text-sm sm:text-base'>
+            <span>{movie?.Runtime}</span>
+            <span>{movie?.Year}</span>
+            {movie?.Genre.split(', ').map((genre) => (
+              <Badge key={genre} variant="info" size="sm">{genre}</Badge>
+            ))}
+          </div>
+          <p className='text-sm sm:text-base'>
+            <span className='font-semibold'>Director:</span> {movie?.Director}
+          </p>
+          <p className='text-sm sm:text-base'>
+            <span className='font-semibold'>Actores:</span> {movie?.Actors}
+          </p>
         </div>
-        <footer className='flex flex-col gap-6 mt-6'>
-          <div className='flex items-center gap-4'>
-            <Button
-              className='bg-gray-300 text-accent-foreground hover:text-white'
-              aria-label='Submit'
-            >
+        {/* Actions */}
+        <footer className='flex flex-col gap-6 pt-4'>
+          {/* Compra */}
+          <div className='flex gap-4 flex-wrap'>
+            <Button className=' bg-gray-300 text-accent-foreground hover:text-white w-full sm:w-auto'>
               Ver con Emirp <ArrowUpIcon />
             </Button>
-            <QualitySelector availableQualities={{ '720p': 'COP 9,900', '1080p': 'COP 19,900', '4k': 'COP 29,900' }} selectedQuality='720p'/>
+
+            <QualitySelector
+              availableQualities={{
+                '720p': 'COP 9,900',
+                '1080p': 'COP 19,900',
+                '4k': 'COP 29,900',
+              }}
+              selectedQuality='720p'
+            />
 
             <CounterRent quantity={1} />
-            {/*
-            <Button
-              className='bg-gray-300 text-accent-foreground hover:text-white'
-              aria-label='Submit'
-            >
-              Alquilar HD COP 9,900
-            </Button>
-            <Button
-              variant='outline'
-              className='bg-gray-300 text-accent-foreground hover:text-white'
-              aria-label='Submit'
-            >
-              Comprar HD COP 24,900
-            </Button>
-            <Button
-              variant='outline'
-              className='bg-gray-300 text-accent-foreground hover:text-white'
-              aria-label='Submit'
-            >
-              Más opciones de compra
-            </Button>
           </div>
-          <div className='flex items-center gap-3'>
+
+          {/* Acciones secundarias */}
+          <div className='flex flex-wrap gap-3 sm:gap-4 2xl:gap-6'>
             <ActionButton
               icon={<Video className='w-5 h-5' />}
               label='Ver trailer'
@@ -98,26 +93,6 @@ export default async function MoviePage({ params }: Props) {
               icon={<Share2 className='w-5 h-5' />}
               label='Compartir'
             />
-            */}
-            <div className='flex items-center gap-3'>
-              <ActionButton
-                icon={<Video className='w-5 h-5' />}
-                label='Ver trailer'
-              />
-              <ActionButton
-                icon={<Plus className='w-6 h-6' />}
-                label='Mi lista'
-                active
-              />
-              <ActionButton
-                icon={<ThumbsUp className='w-5 h-5' />}
-                label='Me gusta'
-              />
-              <ActionButton
-                icon={<Share2 className='w-5 h-5' />}
-                label='Compartir'
-              />
-            </div>
           </div>
         </footer>
       </article>
