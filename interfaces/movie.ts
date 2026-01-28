@@ -2,6 +2,7 @@ export interface Movie {
   imdbID: string
   Title: string
   Year: string
+  Type: string,
   Rated: string
   Released: string
   Runtime: string
@@ -16,6 +17,16 @@ export interface Movie {
   Poster: string
   Ratings: Rating[]
 }
+
+export interface MovieInCart {
+  Title: string
+  Year: string
+  imdbID: string
+  Type: string
+  Poster: string
+  price: string
+}
+
 
 export interface Rating {
   Source: string

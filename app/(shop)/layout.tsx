@@ -8,7 +8,7 @@ export default function ShopLayout({
   children: React.ReactNode
 }>) {
   return (
-    <main className='flex flex-col h-screen items-center justify-center bg-red-500 font-sans overflow-hidden'>
+    <main className='flex flex-col h-screen bg-red-500 font-sans overflow-hidden'>
       <TopMenu />
       <SideUserMenu categories={categories} />
       {children}
