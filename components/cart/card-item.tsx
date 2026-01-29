@@ -5,7 +5,6 @@ import {
   CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
@@ -18,17 +17,16 @@ interface CardItemProps {
 
 export default function CardItem({ movie }: CardItemProps) {
   return (
-    <Card className='flex-row justify-between'>
-      <CardHeader className='w-full'>
-        <CardTitle>{movie.Title}</CardTitle>
+    <Card className='flex-row gap-0'>
+      <CardHeader className='w-32'>
+        <img src={movie.Poster} alt={movie.Title} className='rounded mx-auto' />
+      </CardHeader>
+      <CardContent className='w-2/3 p-0'>
+        <CardTitle className='text-xl'>{movie.Title}</CardTitle>
         <CardDescription>{movie.Year}</CardDescription>
         <CardAction>${movie.price}</CardAction>
-      </CardHeader>
-
-      <CardContent className=''>
-        <img src={movie.Poster} alt={movie.Title} className='w-32 rounded' />
-        <IoCloseCircleOutline />
       </CardContent>
+        <IoCloseCircleOutline className='w-6 h-6'/>
     </Card>
   )
 }
