@@ -5,6 +5,8 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 // import { toast } from "sonner"
 
+import { useCheckoutStore } from '@/store/checkout.store'
+
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -29,11 +31,11 @@ import {
   FieldGroup,
   FieldLabel,
   FieldLegend,
-  FieldSeparator,
   FieldSet,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import CountrySelectByContinent from './selector-country'
+import { useUiStore } from '@/store/ui/ui-store'
 
 const onlyLetters = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/
 
@@ -60,6 +62,11 @@ const formSchema = z.object({
 })
 
 export default function PaymentCheckouttForm() {
+  const setUser = useCheckoutStore((state) => state.setUser)
+  const isLocked = useUiStore((s) => s.isCheckoutLocked)
+  const lockCheckout = useUiStore((s) => s.lockCheckout)
+  const unlockCheckout = useUiStore((s) => s.unlockCheckout)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -73,7 +80,8 @@ export default function PaymentCheckouttForm() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     console.log(data)
-
+    setUser(data)
+    lockCheckout()
     // toast("You submitted the following values:", {
     //   description: (
     //     <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
@@ -96,8 +104,8 @@ export default function PaymentCheckouttForm() {
         <CardTitle>Comprando...</CardTitle>
         <CardDescription>Confirma tus datos y método de pago.</CardDescription>
       </CardHeader>
-      
-      <CardContent>
+
+      <CardContent className='h-full'>
         <form
           id='form-payment-checkout'
           onSubmit={form.handleSubmit(onSubmit)}
@@ -115,6 +123,7 @@ export default function PaymentCheckouttForm() {
                     </FieldLabel>
                     <Input
                       {...field}
+                      disabled={isLocked}
                       id='form-payment-checkout-name'
                       aria-invalid={fieldState.invalid}
                       placeholder='Ingresa tu nombre'
@@ -136,6 +145,7 @@ export default function PaymentCheckouttForm() {
                     </FieldLabel>
                     <Input
                       {...field}
+                      disabled={isLocked}
                       id='form-payment-checkout-lastname'
                       aria-invalid={fieldState.invalid}
                       placeholder='Ingresa tu apellido'
@@ -157,6 +167,7 @@ export default function PaymentCheckouttForm() {
                     </FieldLabel>
                     <Input
                       {...field}
+                      disabled={isLocked}
                       id='form-payment-checkout-address'
                       aria-invalid={fieldState.invalid}
                       placeholder='Ingresa tu dirección'
@@ -177,6 +188,7 @@ export default function PaymentCheckouttForm() {
                     <CountrySelectByContinent
                       value={field.value}
                       onChange={field.onChange}
+                      disabledSelector={isLocked}
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
@@ -194,6 +206,7 @@ export default function PaymentCheckouttForm() {
                     </FieldLabel>
                     <Input
                       {...field}
+                      disabled={isLocked}
                       id='form-payment-checkout-phone'
                       placeholder='Teléfono'
                       autoComplete='off'
@@ -205,7 +218,6 @@ export default function PaymentCheckouttForm() {
                 )}
               />
             </FieldSet>
-          
           </FieldGroup>
 
           <FieldGroup>
@@ -220,6 +232,7 @@ export default function PaymentCheckouttForm() {
                     Name on Card
                   </FieldLabel>
                   <Input
+                    disabled={isLocked}
                     id='checkout-7j9-card-name-43j'
                     placeholder='Evil Rabbit'
                     required
@@ -230,6 +243,7 @@ export default function PaymentCheckouttForm() {
                     Card Number
                   </FieldLabel>
                   <Input
+                    disabled={isLocked}
                     id='checkout-7j9-card-number-uw1'
                     placeholder='1234 5678 9012 3456'
                     required
@@ -243,7 +257,7 @@ export default function PaymentCheckouttForm() {
                     <FieldLabel htmlFor='checkout-exp-month-ts6'>
                       Month
                     </FieldLabel>
-                    <Select defaultValue=''>
+                    <Select defaultValue='' disabled={isLocked}>
                       <SelectTrigger id='checkout-exp-month-ts6'>
                         <SelectValue placeholder='MM' />
                       </SelectTrigger>
@@ -269,7 +283,7 @@ export default function PaymentCheckouttForm() {
                     <FieldLabel htmlFor='checkout-7j9-exp-year-f59'>
                       Year
                     </FieldLabel>
-                    <Select defaultValue=''>
+                    <Select defaultValue='' disabled={isLocked}>
                       <SelectTrigger id='checkout-7j9-exp-year-f59'>
                         <SelectValue placeholder='YYYY' />
                       </SelectTrigger>
@@ -287,7 +301,12 @@ export default function PaymentCheckouttForm() {
                   </Field>
                   <Field>
                     <FieldLabel htmlFor='checkout-7j9-cvv'>CVV</FieldLabel>
-                    <Input id='checkout-7j9-cvv' placeholder='123' required />
+                    <Input
+                      disabled={isLocked}
+                      id='checkout-7j9-cvv'
+                      placeholder='123'
+                      required
+                    />
                   </Field>
                 </div>
               </FieldGroup>
@@ -295,15 +314,23 @@ export default function PaymentCheckouttForm() {
           </FieldGroup>
         </form>
       </CardContent>
-      <CardFooter >
-        <Field orientation='horizontal'>
-          <Button type='button' variant='outline' onClick={() => form.reset()}>
-            Reset
+      <CardFooter>
+        {isLocked ? (
+          <Button
+            type='button'
+            variant='secondary'
+            onClick={(e) => {
+              e.preventDefault()
+              unlockCheckout()
+            }}
+          >
+            Editar información
           </Button>
+        ) : (
           <Button type='submit' form='form-payment-checkout'>
-            Submit
+            Confirmar datos
           </Button>
-        </Field>
+        )}
       </CardFooter>
     </Card>
   )
