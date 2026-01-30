@@ -24,7 +24,7 @@ export default function CardItem({ movie }: CardItemProps) {
       <CardContent className='w-2/3 p-0'>
         <CardTitle className='text-xl'>{movie.Title}</CardTitle>
         <CardDescription>{movie.Year}</CardDescription>
-        <CardAction>${movie.price}</CardAction>
+        <CardAction>${movie.price.amount}</CardAction>
       </CardContent>
         <IoCloseCircleOutline className='w-6 h-6'/>
     </Card>

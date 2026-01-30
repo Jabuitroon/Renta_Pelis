@@ -1,6 +1,6 @@
 'use client'
 import { Movie } from '@/interfaces/movie'
-import Link from 'next/dist/client/link'
+import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { motion } from 'motion/react'
 
@@ -64,7 +64,7 @@ export default function MoviesGrid({
           {/* Previous */}
           <li>
             {currentPage > 1 ? (
-              <a
+              <Link
                 href={createPageURL(currentPage - 1)}
                 aria-label={`Go to previous page, page ${currentPage - 1}`}
                 aria-disabled='true'
@@ -72,7 +72,7 @@ export default function MoviesGrid({
                 className='inline-flex h-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               >
                 Previous
-              </a>
+              </Link>
             ) : (
               <span
                 aria-disabled='true'
@@ -86,12 +86,12 @@ export default function MoviesGrid({
           {/* first Page */}
           {currentPage > 2 && (
             <li>
-              <a
+              <Link
                 href={createPageURL(1)}
                 className='inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               >
                 1
-              </a>
+              </Link>
             </li>
           )}
           {/* Ellipsis */}
@@ -132,25 +132,25 @@ export default function MoviesGrid({
           {/* Last Page */}
           {currentPage < totalPages - 1 && (
             <li>
-              <a
+              <Link
                 href={createPageURL(totalPages)}
                 className='inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               >
                 {totalPages}
-              </a>
+              </Link>
             </li>
           )}
 
           {/* Next */}
           <li>
             {currentPage !== totalPages ? (
-              <a
+              <Link
                 href={createPageURL(currentPage + 1)}
                 aria-label={`Go to next page, page ${currentPage + 1}`}
                 className='inline-flex h-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               >
                 Next
-              </a>
+              </Link>
             ) : (
               <span
                 aria-disabled='true'

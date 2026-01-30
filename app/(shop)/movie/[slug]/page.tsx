@@ -58,25 +58,27 @@ export default async function MoviePage({ params }: Props) {
 
         {/* Actions */}
         <footer className='flex flex-col gap-6 pt-4'>
-          {/* Compra */}
+          {/* Compra o Alquiler*/}
           <div className='flex gap-4 flex-wrap'>
             <Button className=' bg-gray-300 text-xl text-accent-foreground hover:text-white w-full sm:w-auto h-12 grow'>
               Ver con Emirp <ArrowUpIcon />
             </Button>
             <ModalRentSell
+              movie={movie}
               buttonSpan='Alquilar'
-              optionsSelector={{
-                '720p': 'COP 9,900',
-                '1080p': 'COP 19,900',
-                '4k': 'COP 29,900',
+              availableQualities={{
+                '720p': 'COP 9900',
+                '1080p': 'COP 19900',
+                '4k': 'COP 29900',
               }}
             />
             <ModalRentSell
+              movie={movie}
               buttonSpan='Comprar'
-              optionsSelector={{
-                '720p': 'COP 15,900',
-                '1080p': 'COP 30,900',
-                '4k': 'COP 45,900',
+              availableQualities={{
+                '720p': 'COP 15900',
+                '1080p': 'COP 30900',
+                '4k': 'COP 45900',
               }}
             />
           </div>

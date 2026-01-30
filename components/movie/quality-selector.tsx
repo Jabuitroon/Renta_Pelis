@@ -11,20 +11,28 @@ import { QualityOption } from '@/interfaces/movie'
 
 interface Props {
   availableQualities: Record<QualityOption, string>
-  selectedQuality?: QualityOption
+  value?: QualityOption
+  onChange: (value: QualityOption) => void
+  placeholder?: string
+  disabled?: boolean
 }
 export function QualitySelector({
   availableQualities,
-  selectedQuality,
+  value,
+  onChange,
+  placeholder = 'Alquilar desde COP 9,900',
+  disabled = false,
 }: Props) {
   return (
-    <Select>
+    <Select value={value} onValueChange={onChange} disabled={disabled}>
       <SelectTrigger className='w-full max-w-48'>
-        <SelectValue placeholder='Alquilar desde COP 9,900' />
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
+
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Qualities</SelectLabel>
+
           {Object.entries(availableQualities).map(([quality, price]) => (
             <SelectItem key={quality} value={quality}>
               {quality} por {price}

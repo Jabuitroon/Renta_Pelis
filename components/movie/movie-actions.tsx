@@ -1,0 +1,55 @@
+'use client'
+
+import { Plus, Check } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useCartStore } from '@/store/cart.store'
+import { MovieInCart } from '@/interfaces/movie'
+
+interface Props {
+  movie: MovieInCart
+}
+
+export default function MovieActions({ movie }: Props) {
+  const addItem = useCartStore((s) => s.addItem)
+  const removeItem = useCartStore((s) => s.removeItem)
+  const isInCart = useCartStore((s) => s.isInCart)
+
+  const inCart = isInCart(movie.imdbID)
+
+  const handleCartToggle = () => {
+    if (inCart) {
+      removeItem(movie.imdbID)
+    } else {
+      addItem({
+        Title: movie.Title,
+        Year: movie.Year,
+        imdbID: movie.imdbID,
+        Type: movie.Type,
+        Poster: movie.Poster,
+        quality: movie.quality,
+        state: movie.state,
+        price: movie.price,
+      })
+    }
+  }
+
+  return (
+    <Button
+      variant={inCart ? 'secondary' : 'default'}
+      onClick={handleCartToggle}
+      className='flex gap-2'
+    >
+      {inCart ? (
+        <>
+          <Check className='w-4 h-4' />
+          En el carrito
+        </>
+      ) : (
+        <>
+          <Plus className='w-4 h-4' />
+          Agregar al carrito
+        </>
+      )}
+    </Button>
+  )
+}
