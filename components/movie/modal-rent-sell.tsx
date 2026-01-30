@@ -43,12 +43,11 @@ export default function ModalRentSell({
   })
 
   const addItem = useCartStore((state) => state.addItem)
-  const items = useCartStore((state) => state.items)
 
   const onSubmit = (data: FormValues) => {
     const strPrice = availableQualities[data.quality]
-    console.log(strPrice);
-    
+    console.log(strPrice)
+
     const [currency, amount] = strPrice.split(' ')
 
     const movieInCart = {
@@ -57,16 +56,16 @@ export default function ModalRentSell({
       imdbID: movie.imdbID,
       Type: movie.Type,
       Poster: movie.Poster,
+      Genre: movie.Genre,
       quality: data.quality,
       state: buttonSpan,
       price: {
         amount: Number(amount),
-        currency: currency ,
+        currency: currency,
       },
     }
 
     addItem(movieInCart)
-    console.log(items)
   }
   return (
     <Dialog>

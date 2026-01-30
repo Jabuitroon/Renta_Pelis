@@ -105,7 +105,7 @@ export default function PaymentCheckouttForm() {
         <CardDescription>Confirma tus datos y método de pago.</CardDescription>
       </CardHeader>
 
-      <CardContent className='h-full'>
+      <CardContent>
         <form
           id='form-payment-checkout'
           onSubmit={form.handleSubmit(onSubmit)}

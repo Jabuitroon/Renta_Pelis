@@ -44,6 +44,7 @@ export interface MovieInCart {
   Year: string
   imdbID: string
   Type: string
+  Genre: string
   Poster: string
   quality: QualityOption
   state: 'Alquilar' | 'Comprar'
