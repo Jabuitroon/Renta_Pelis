@@ -72,7 +72,7 @@ export default function ModalRentSell({
       <form id='form-Rent-Sell' onSubmit={handleSubmit(onSubmit)}>
         <DialogTrigger asChild>
           <Button
-            className='bg-gray-300 text-accent-foreground hover:text-white w-3xs h-12 text-xl'
+            className='bg-gray-300 text-background hover:text-white w-3xs h-12 text-xl'
             aria-label='Submit'
             variant='outline'
           >

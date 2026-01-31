@@ -22,7 +22,7 @@ export default async function MoviePage({ params }: Props) {
   }
 
   return (
-    <main className='flex flex-col h-screen w-full overflow-y-auto bg-accent-foreground font-sans dark:bg-gray-900 lg:flex-row lg:items-start lg:justify-center 2xl:gap-20 2xl:px-24'>
+    <main className='flex flex-col h-screen w-full overflow-y-auto bg-background font-sans dark:bg-gray-900 lg:flex-row lg:items-start lg:justify-center 2xl:gap-20 2xl:px-24'>
       {/* Poster */}
       <div className='w-full max-w-xs mx-auto p-4 sm:max-w-sm md:max-w-md lg:max-w-sm 2xl:max-w-lg'>
         <img
@@ -60,7 +60,7 @@ export default async function MoviePage({ params }: Props) {
         <footer className='flex flex-col gap-6 pt-4'>
           {/* Compra o Alquiler*/}
           <div className='flex gap-4 flex-wrap'>
-            <Button className=' bg-gray-300 text-xl text-accent-foreground hover:text-white w-full sm:w-auto h-12 grow'>
+            <Button className=' bg-gray-300 text-xl text-background hover:text-white w-full sm:w-auto h-12 grow'>
               Ver con Emirp <ArrowUpIcon />
             </Button>
             <ModalRentSell

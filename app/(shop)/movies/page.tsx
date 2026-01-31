@@ -24,7 +24,7 @@ export default async function MoviesPage(props: {
   console.log('currentPage:', currentPage, 'pagesNeeded:', pagesNeeded)
 
   return (
-    <div className='w-full h-full overflow-y-auto scroll-smooth snap-y snap-mandatory bg-accent-foreground font-sans dark:bg-gray-900'>
+    <div className='w-full h-full overflow-y-auto scroll-smooth snap-y snap-mandatory bg-background font-sans dark:bg-gray-900'>
       <HeroCarousel />
       <Suspense key={query + currentPage}>
         <MoviesGrid
