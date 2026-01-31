@@ -22,7 +22,6 @@ interface ModalRentSellProps {
   movie: Movie
   buttonSpan: 'Alquilar' | 'Comprar'
   availableQualities: Record<string, string>
-  daysToRent?: boolean
 }
 
 type FormValues = {
@@ -58,28 +57,31 @@ export default function ModalRentSell({
       Poster: movie.Poster,
       Genre: movie.Genre,
       quality: data.quality,
+      days: data.days,
       state: buttonSpan,
       price: {
         amount: Number(amount),
         currency: currency,
       },
     }
+    console.log(movieInCart)
 
     addItem(movieInCart)
   }
   return (
     <Dialog>
-      <form id='form-Rent-Sell' onSubmit={handleSubmit(onSubmit)}>
-        <DialogTrigger asChild>
-          <Button
-            className='bg-gray-300 text-background hover:text-white w-3xs h-12 text-xl'
-            aria-label='Submit'
-            variant='outline'
-          >
-            {buttonSpan}
-          </Button>
-        </DialogTrigger>
-        <DialogContent className='sm:max-w-106.25'>
+      <DialogTrigger asChild>
+        <Button
+          className='bg-gray-300 text-background hover:text-white w-3xs h-12 text-xl'
+          aria-label='Submit'
+          variant='outline'
+        >
+          {buttonSpan}
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className='sm:max-w-106.25'>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle className='text-wrap'>
               <span>Elige tus preferencias para {buttonSpan}:</span>
@@ -111,16 +113,19 @@ export default function ModalRentSell({
               />
             )}
           </div>
+
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant='outline'>Cancel</Button>
+              <Button type='button' variant='outline'>
+                Cancel
+              </Button>
             </DialogClose>
-            <Button type='submit' form='form-Rent-Sell'>
+            <Button type='submit'>
               Confirmar preferencias
             </Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   )
 }

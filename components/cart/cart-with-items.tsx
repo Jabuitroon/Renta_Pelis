@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import CardItem from '@/components/cart/card-item'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
@@ -8,7 +7,6 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import {
   Film,
-  ShoppingCart,
   Trash2,
   Plus,
   Minus,
@@ -19,6 +17,7 @@ import {
   ChevronRight,
 } from 'lucide-react'
 import { MovieInCart } from '@/interfaces/movie'
+import { useCartStore } from '@/store/cart.store'
 
 interface Props {
   cartItems: MovieInCart[]
@@ -26,14 +25,14 @@ interface Props {
 }
 
 export default function CartWithItems({ cartItems, total }: Props) {
+  const removeItem = useCartStore((s) => s.removeItem)
+  console.log(cartItems)
+
   return (
     <div className='bg-background mx-auto'>
       <section className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
         {/* Page Title */}
         <div className='mb-8 flex items-center gap-4'>
-          {/* {items.map((movie) => (
-          <CardItem key={movie.imdbID} movie={movie} />
-          ))} */}
           <div className='flex h-12 w-12 items-center justify-center rounded-full bg-primary/10'>
             <Ticket className='h-6 w-6 text-primary' />
           </div>
@@ -42,7 +41,8 @@ export default function CartWithItems({ cartItems, total }: Props) {
               Tu Carrito de Pelis
             </h1>
             <p className='text-muted-foreground'>
-              Tienes {cartItems.length}{' '} {cartItems.length === 1 ? 'item' : 'items'} para tí
+              Tienes {cartItems.length}{' '}
+              {cartItems.length === 1 ? 'item' : 'items'} para tí
             </p>
           </div>
         </div>
@@ -90,14 +90,14 @@ export default function CartWithItems({ cartItems, total }: Props) {
                               {item.Type} : {item.Title}
                             </h3>
                             {/* Remover peli */}
-                            {/* <Button
-                                variant='ghost'
-                                size='icon'
-                                className='h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive'
-                                onClick={() => removeItem(item.id)}
-                              >
-                                <Trash2 className='h-4 w-4' />
-                              </Button> */}
+                            <Button
+                              variant='ghost'
+                              size='icon-lg'
+                              className='h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive'
+                              onClick={() => removeItem(item.imdbID)}
+                            >
+                              <Trash2 className='h-4 w-4' />
+                            </Button>
                           </div>
 
                           <div className='mb-2 flex flex-wrap items-center gap-2 text-sm text-muted-foreground'>
@@ -121,28 +121,30 @@ export default function CartWithItems({ cartItems, total }: Props) {
 
                         {/* Quantity and Price */}
                         <div className='mt-4 flex items-center justify-between'>
-                          <div className='flex items-center gap-2'>
-                            {/* AUmentar dias de renta */}
-                            {/* <Button
+                          {item.state === 'Alquilar' && (
+                            <div className='flex items-center gap-2'>
+                              {/* AUmentar dias de renta */}
+                              <Button
                                 variant='outline'
                                 size='icon'
                                 className='h-8 w-8 bg-transparent'
-                                onClick={() => updateQuantity(item.id, -1)}
                               >
+                                {/* onClick={() => updateQuantity(item.id, -1)} */}
                                 <Minus className='h-3 w-3' />
-                              </Button> */}
-                            {/* <span className='w-8 text-center font-medium text-card-foreground'>
-                                {item.quantity}
-                              </span> */}
-                            {/* <Button
+                              </Button>
+                              <span className='w-8 text-center font-medium text-card-foreground'>
+                                {item.days}
+                              </span>
+                              <Button
                                 variant='outline'
                                 size='icon'
                                 className='h-8 w-8 bg-transparent'
-                                onClick={() => updateQuantity(item.id, 1)}
                               >
+                                {/* onClick={() => updateQuantity(item.id, 1)} */}
                                 <Plus className='h-3 w-3' />
-                              </Button> */}
-                          </div>
+                              </Button>
+                            </div>
+                          )}
                           <div className='text-right'>
                             {/* Renta? */}
                             {/* <div className='text-lg font-bold text-primary'>

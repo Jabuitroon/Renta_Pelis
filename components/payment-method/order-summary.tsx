@@ -1,7 +1,7 @@
 'use client'
 
 import { MovieInCart } from '@/interfaces/movie'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 import Link from 'next/link'
 
 interface OrderSummaryProps {

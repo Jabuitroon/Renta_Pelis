@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useCartStore } from '@/store/cart.store'
 import { useCheckoutStore } from '@/store/checkout.store'
-import { OrderSummary } from '../order-summary'
+import { OrderSummary } from './order-summary'
 
 export default function OrderPreview() {
   const user = useCheckoutStore((state) => state.user)

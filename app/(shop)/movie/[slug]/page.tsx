@@ -65,20 +65,20 @@ export default async function MoviePage({ params }: Props) {
             </Button>
             <ModalRentSell
               movie={movie}
-              buttonSpan='Alquilar'
-              availableQualities={{
-                '720p': 'COP 9900',
-                '1080p': 'COP 19900',
-                '4k': 'COP 29900',
-              }}
-            />
-            <ModalRentSell
-              movie={movie}
               buttonSpan='Comprar'
               availableQualities={{
                 '720p': 'COP 15900',
                 '1080p': 'COP 30900',
                 '4k': 'COP 45900',
+              }}
+            />
+            <ModalRentSell
+              movie={movie}
+              buttonSpan='Alquilar'
+              availableQualities={{
+                '720p': 'COP 9900',
+                '1080p': 'COP 19900',
+                '4k': 'COP 29900',
               }}
             />
           </div>
