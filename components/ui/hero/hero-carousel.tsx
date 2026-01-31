@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface CarouselSlide {
-  id: number
+  id: string
   title: string
   subtitle?: string
   ranking?: string
@@ -20,35 +20,35 @@ interface CarouselSlide {
 
 const slides: CarouselSlide[] = [
   {
-    id: 1,
-    title: 'Las de Siempre',
-    ranking: '#1 en Colombia',
-    description: 'Ver con Amazon Prime',
+    id: 'tt4154796',
+    title: 'Avengers: Endgame',
+    ranking: '#1 en U.S',
+    description: 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins.',
     ctaText: 'Inicia tu prueba gratis de 30 días',
-    ctaSubtext: 'Suscribirse a Prime',
-    image: '/images/image.png',
+    ctaSubtext: 'Suscribirse a Emirp',
+    image: 'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg',
     ageRating: '16+',
     disclaimer: 'Se aplican términos',
-  },
+    },
   {
-    id: 2,
-    title: 'El Secreto',
+    id: 'tt14001894',
+    title: 'Secret Headquarters',
     ranking: '#2 en Colombia',
-    description: 'Exclusivo en streaming',
+    description: 'While hanging out after school, Charlie and his friends discover the headquarters of the world s most powerful superhero hidden beneath his home.',
     ctaText: 'Ver ahora',
     ctaSubtext: 'Incluido con tu suscripción',
-    image: '/images/image.png',
+    image: 'https://m.media-amazon.com/images/M/MV5BZWU1YzlmNmQtZDViMy00OGQ4LTk3NDEtMjlmYWEwODdlNThiXkEyXkFqcGc@._V1_SX300.jpg',
     ageRating: '13+',
     disclaimer: 'Se aplican términos',
   },
   {
-    id: 3,
-    title: 'Amor Infinito',
+    id: 'tt0993846',
+    title: 'The Wolf of Wall Street',
     ranking: '#3 en Colombia',
-    description: 'Nueva temporada disponible',
+    description: 'Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime',
     ctaText: 'Continuar viendo',
-    ctaSubtext: 'Episodio 5',
-    image: '/images/image.png',
+    ctaSubtext: 'Disponible para compra',
+    image: 'https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SX300.jpg',
     ageRating: '18+',
     disclaimer: 'Se aplican términos',
   },
@@ -88,7 +88,7 @@ export default function HeroCarousel() {
       {/* Background Image */}
       <div className='absolute inset-0'>
         <div
-          className='absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700'
+          className='absolute inset-0 bg-cover bg-top bg-no-repeat transition-opacity duration-700'
           style={{ backgroundImage: `url(${slide.image})` }}
         />
         {/* Gradient Overlays */}
@@ -148,20 +148,20 @@ export default function HeroCarousel() {
         <div className='flex items-center gap-3 mb-4'>
           <Button className='bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white px-6 py-6 rounded-md text-left'>
             <div>
-              <div className='font-semibold text-sm'>{slide.description}</div>
+              <div className='font-semibold text-sm '>{slide.description}</div>
               <div className='text-xs text-white/70'>{slide.ctaText}</div>
             </div>
           </Button>
 
           <button
-            className='w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-colors'
+            className='min-w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-colors'
             aria-label='Agregar a mi lista'
           >
             <Plus className='w-5 h-5' />
           </button>
 
           <button
-            className='w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-colors'
+            className='min-w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-colors'
             aria-label='Más información'
           >
             <Info className='w-5 h-5' />
