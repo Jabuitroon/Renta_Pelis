@@ -26,7 +26,7 @@ export default function CardItem({ movie }: CardItemProps) {
         <CardDescription>{movie.Year}</CardDescription>
         <CardAction>${movie.price.amount}</CardAction>
       </CardContent>
-        <IoCloseCircleOutline className='w-6 h-6'/>
+      <IoCloseCircleOutline className='w-6 h-6' />
     </Card>
   )
 }

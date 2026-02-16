@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Film, Home, Search, Clapperboard} from 'lucide-react'
+import { Film, Home, Search, Clapperboard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function NotFound404() {
@@ -11,7 +11,7 @@ export function NotFound404() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFilmCount((prev) => {
+      setFilmCount((prev: number) => {
         if (prev >= 404) {
           clearInterval(interval)
           return 404
@@ -33,25 +33,25 @@ export function NotFound404() {
   }, [])
 
   return (
-    <div className='h-full w-full bg-background text-foreground flex flex-col'>
+    <div className='bg-background text-foreground flex h-full w-full flex-col'>
       {/* Film strip decoration top */}
-      <div className='absolute w-full h-8 bg-secondary flex items-center overflow-hidden'>
-        <div className='flex animate-scroll'>
+      <div className='bg-secondary absolute flex h-8 w-full items-center overflow-hidden'>
+        <div className='animate-scroll flex'>
           {Array.from({ length: 20 }).map((_, i) => (
             <div key={i} className='flex items-center gap-1 px-4'>
-              <div className='w-3 h-4 bg-background rounded-sm' />
-              <div className='w-3 h-4 bg-background rounded-sm' />
+              <div className='bg-background h-4 w-3 rounded-sm' />
+              <div className='bg-background h-4 w-3 rounded-sm' />
             </div>
           ))}
         </div>
       </div>
 
       {/* Main content */}
-      <main className='flex-1 flex flex-col items-center justify-center px-4 py-16'>
+      <main className='flex flex-1 flex-col items-center justify-center px-4 py-16'>
         {/* 404 Display */}
         <div className='relative mb-8'>
           <div
-            className={`text-[50px] md:text-[200px] lg:text-[150px] font-bold leading-none tracking-tighter transition-all duration-100 ${
+            className={`text-[50px] leading-none font-bold tracking-tighter transition-all duration-100 md:text-[200px] lg:text-[150px] ${
               isGlitching ? 'text-primary translate-x-1' : 'text-foreground'
             }`}
           >
@@ -61,18 +61,18 @@ export function NotFound404() {
           {/* Film reel overlay */}
           <div className='absolute -top-4 -right-4 md:-top-8 md:-right-8'>
             <div className='relative'>
-              <Film className='w-12 h-12 md:w-16 md:h-16 text-primary animate-spin-slow' />
+              <Film className='text-primary animate-spin-slow h-12 w-12 md:h-16 md:w-16' />
             </div>
           </div>
 
           {/* Clapperboard decoration */}
           <div className='absolute -bottom-2 -left-4 md:-bottom-4 md:-left-8'>
-            <Clapperboard className='w-8 h-8 md:w-14 md:h-14 text-muted-foreground' />
+            <Clapperboard className='text-muted-foreground h-8 w-8 md:h-14 md:w-14' />
           </div>
         </div>
 
         {/* Message */}
-        <div className='text-center max-w-xl mb-12 space-y-4'>
+        <div className='mb-12 max-w-xl space-y-4 text-center'>
           <h1 className='text-2xl font-bold tracking-tight text-balance'>
             Escena No Encontrada
           </h1>
@@ -83,10 +83,10 @@ export function NotFound404() {
         </div>
 
         {/* Action buttons */}
-        <div className='flex flex-col sm:flex-row gap-4 mb-16'>
+        <div className='mb-16 flex flex-col gap-4 sm:flex-row'>
           <Button asChild size='lg' className='gap-2 text-base'>
             <Link href='/'>
-              <Home className='w-5 h-5' />
+              <Home className='h-5 w-5' />
               Volver al Inicio
             </Link>
           </Button>
@@ -94,10 +94,10 @@ export function NotFound404() {
             asChild
             variant='outline'
             size='lg'
-            className='gap-2 text-base bg-transparent'
+            className='gap-2 bg-transparent text-base'
           >
             <Link href='/catalogo'>
-              <Search className='w-5 h-5' />
+              <Search className='h-5 w-5' />
               Explorar Catálogo
             </Link>
           </Button>
@@ -105,12 +105,12 @@ export function NotFound404() {
       </main>
 
       {/* Film strip decoration bottom */}
-      <div className='absolute w-full h-8 bg-secondary flex items-center overflow-hidden'>
-        <div className='flex animate-scroll-reverse'>
+      <div className='bg-secondary absolute flex h-8 w-full items-center overflow-hidden'>
+        <div className='animate-scroll-reverse flex'>
           {Array.from({ length: 20 }).map((_, i) => (
             <div key={i} className='flex items-center gap-1 px-4'>
-              <div className='w-3 h-4 bg-background rounded-sm' />
-              <div className='w-3 h-4 bg-background rounded-sm' />
+              <div className='bg-background h-4 w-3 rounded-sm' />
+              <div className='bg-background h-4 w-3 rounded-sm' />
             </div>
           ))}
         </div>
