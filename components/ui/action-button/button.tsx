@@ -3,22 +3,26 @@ interface ActionButtonProps {
   label: string
   active?: boolean
 }
-export function ActionButton({ icon, label, active = false }: ActionButtonProps) {
+export function ActionButton({
+  icon,
+  label,
+  active = false,
+}: ActionButtonProps) {
   return (
-    <div className="relative group">
+    <div className='group relative'>
       {/* Tooltip */}
-      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white text-zinc-900 text-sm font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
+      <div className='pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 rounded bg-white px-3 py-1.5 text-sm font-medium whitespace-nowrap text-zinc-900 opacity-0 transition-opacity duration-200 group-hover:opacity-100'>
         {label}
         {/* Arrow */}
-        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white" />
+        <div className='absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white' />
       </div>
-      
+
       {/* Button */}
       <button
-        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110 ${
+        className={`flex h-12 w-12 items-center justify-center rounded-full transition-all duration-200 group-hover:scale-110 ${
           active
-            ? "bg-white text-zinc-900"
-            : "bg-zinc-800/80 text-zinc-300 hover:bg-zinc-700"
+            ? 'bg-white text-zinc-900'
+            : 'bg-zinc-800/80 text-zinc-300 hover:bg-zinc-700'
         }`}
       >
         {icon}

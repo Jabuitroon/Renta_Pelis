@@ -23,21 +23,25 @@ const slides: CarouselSlide[] = [
     id: 'tt4154796',
     title: 'Avengers: Endgame',
     ranking: '#1 en U.S',
-    description: 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins.',
+    description:
+      'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins.',
     ctaText: 'Inicia tu prueba gratis de 30 días',
     ctaSubtext: 'Suscribirse a Emirp',
-    image: 'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg',
+    image:
+      'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg',
     ageRating: '16+',
     disclaimer: 'Se aplican términos',
-    },
+  },
   {
     id: 'tt14001894',
     title: 'Secret Headquarters',
     ranking: '#2 en Colombia',
-    description: 'While hanging out after school, Charlie and his friends discover the headquarters of the world s most powerful superhero hidden beneath his home.',
+    description:
+      'While hanging out after school, Charlie and his friends discover the headquarters of the world s most powerful superhero hidden beneath his home.',
     ctaText: 'Ver ahora',
     ctaSubtext: 'Incluido con tu suscripción',
-    image: 'https://m.media-amazon.com/images/M/MV5BZWU1YzlmNmQtZDViMy00OGQ4LTk3NDEtMjlmYWEwODdlNThiXkEyXkFqcGc@._V1_SX300.jpg',
+    image:
+      'https://m.media-amazon.com/images/M/MV5BZWU1YzlmNmQtZDViMy00OGQ4LTk3NDEtMjlmYWEwODdlNThiXkEyXkFqcGc@._V1_SX300.jpg',
     ageRating: '13+',
     disclaimer: 'Se aplican términos',
   },
@@ -45,10 +49,12 @@ const slides: CarouselSlide[] = [
     id: 'tt0993846',
     title: 'The Wolf of Wall Street',
     ranking: '#3 en Colombia',
-    description: 'Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime',
+    description:
+      'Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime',
     ctaText: 'Continuar viendo',
     ctaSubtext: 'Disponible para compra',
-    image: 'https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SX300.jpg',
+    image:
+      'https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SX300.jpg',
     ageRating: '18+',
     disclaimer: 'Se aplican términos',
   },
@@ -84,7 +90,7 @@ export default function HeroCarousel() {
   const slide = slides[currentSlide]
 
   return (
-    <div className='group relative w-full h-125  snap-start bg-[#0f1623]'>
+    <div className='group relative h-125 w-full snap-start bg-[#0f1623]'>
       {/* Background Image */}
       <div className='absolute inset-0'>
         <div
@@ -102,33 +108,33 @@ export default function HeroCarousel() {
           prevSlide()
           setIsAutoPlaying(false)
         }}
-        className='absolute left-2 top-1/2 -translate-y-1/2 z-20 p-1 rounded-full bg-black/30 hover:bg-black/50 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300'
+        className='absolute top-1/2 left-2 z-20 -translate-y-1/2 rounded-full bg-black/30 p-1 text-white/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-black/50 hover:text-white'
         aria-label='Anterior'
       >
-        <ChevronLeft className='w-6 h-6' />
+        <ChevronLeft className='h-6 w-6' />
       </button>
       <button
         onClick={() => {
           nextSlide()
           setIsAutoPlaying(false)
         }}
-        className='absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white/70 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300'
+        className='absolute top-1/2 right-4 z-20 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-black/50 hover:text-white'
         aria-label='Siguiente'
       >
-        <ChevronRight className='w-6 h-6' />
+        <ChevronRight className='h-6 w-6' />
       </button>
 
       {/* Content */}
-      <div className='relative z-10 h-full flex flex-col justify-center px-8 md:px-12 max-w-2xl'>
+      <div className='relative z-10 flex h-full max-w-2xl flex-col justify-center px-8 md:px-12'>
         {/* Prime Logo */}
         <div className='mb-4'>
-          <span className='text-[#00a8e1] font-semibold text-lg italic'>
+          <span className='text-lg font-semibold text-[#00a8e1] italic'>
             prime
           </span>
         </div>
 
         {/* Title */}
-        <h1 className='text-4xl md:text-6xl font-bold text-white mb-2 tracking-tight'>
+        <h1 className='mb-2 text-4xl font-bold tracking-tight text-white md:text-6xl'>
           <span className='text-[#f0d060]'>●</span>{' '}
           <span className='bg-linear-to-r from-white via-[#00d4aa] to-[#00a8e1] bg-clip-text text-transparent'>
             {slide.title}
@@ -138,41 +144,41 @@ export default function HeroCarousel() {
         {/* Ranking Badge */}
         {slide.ranking && (
           <div className='mb-4'>
-            <span className='text-[#00d4aa] font-semibold text-sm'>
+            <span className='text-sm font-semibold text-[#00d4aa]'>
               {slide.ranking}
             </span>
           </div>
         )}
 
         {/* CTA Section */}
-        <div className='flex items-center gap-3 mb-4'>
-          <Button className='bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white px-6 py-6 rounded-md text-left'>
+        <div className='mb-4 flex items-center gap-3'>
+          <Button className='rounded-md border border-white/20 bg-white/10 px-6 py-6 text-left text-white backdrop-blur-sm hover:bg-white/20'>
             <div>
-              <div className='font-semibold text-sm '>{slide.description}</div>
+              <div className='text-sm font-semibold'>{slide.description}</div>
               <div className='text-xs text-white/70'>{slide.ctaText}</div>
             </div>
           </Button>
 
           <button
-            className='min-w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-colors'
+            className='flex h-12 min-w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20'
             aria-label='Agregar a mi lista'
           >
-            <Plus className='w-5 h-5' />
+            <Plus className='h-5 w-5' />
           </button>
 
           <button
-            className='min-w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-colors'
+            className='flex h-12 min-w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20'
             aria-label='Más información'
           >
-            <Info className='w-5 h-5' />
+            <Info className='h-5 w-5' />
           </button>
         </div>
 
         {/* Subscribe Link */}
         {slide.ctaSubtext && (
-          <div className='flex items-center gap-2 text-white/80 text-sm'>
+          <div className='flex items-center gap-2 text-sm text-white/80'>
             <span className='text-amber-500'>👑</span>
-            <span className='hover:underline cursor-pointer'>
+            <span className='cursor-pointer hover:underline'>
               {slide.ctaSubtext}
             </span>
           </div>
@@ -180,28 +186,28 @@ export default function HeroCarousel() {
       </div>
 
       {/* Bottom Right Info */}
-      <div className='absolute bottom-8 right-8 z-10 text-right'>
+      <div className='absolute right-8 bottom-8 z-10 text-right'>
         {slide.disclaimer && (
-          <p className='text-white/60 text-xs mb-2'>{slide.disclaimer}</p>
+          <p className='mb-2 text-xs text-white/60'>{slide.disclaimer}</p>
         )}
         {slide.ageRating && (
-          <span className='inline-block bg-white/20 text-white text-xs px-2 py-1 rounded'>
+          <span className='inline-block rounded bg-white/20 px-2 py-1 text-xs text-white'>
             {slide.ageRating}
           </span>
         )}
       </div>
 
       {/* Pagination Dots */}
-      <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2'>
+      <div className='absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2'>
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
             className={cn(
-              'w-2 h-2 rounded-full transition-all duration-300',
+              'h-2 w-2 rounded-full transition-all duration-300',
               index === currentSlide
-                ? 'bg-white w-6'
-                : 'bg-white/40 hover:bg-white/60',
+                ? 'w-6 bg-white'
+                : 'bg-white/40 hover:bg-white/60'
             )}
             aria-label={`Ir a slide ${index + 1}`}
           />

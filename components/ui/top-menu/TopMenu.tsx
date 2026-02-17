@@ -40,46 +40,46 @@ export default function TopMenu() {
     replace(`${pathname}?${params.toString()}`)
   }, 300)
   return (
-    <nav className='flex h-12 w-full px-10 justify-between items-center bg-accent'>
+    <nav className='bg-accent flex h-12 w-full items-center justify-between px-10'>
       <div className='flex items-center gap-3'>
-        <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-primary'>
-          <Film className='h-6 w-6 text-primary-foreground' />
+        <div className='bg-primary flex h-10 w-10 items-center justify-center rounded-lg'>
+          <Film className='text-primary-foreground h-6 w-6' />
         </div>
         <Link href='/'>
           <span
-            className={`${montserratAlternates.className} font-bold antialiased text-xl tracking-wider text-foreground`}
+            className={`${montserratAlternates.className} text-foreground text-xl font-bold tracking-wider antialiased`}
           >
             MoviRent
           </span>
         </Link>
       </div>
-      <ul className=' sm:flex h-12 gap-2 items-center'>
-        <li className='flex items-center h-12 rounded-md hover:bg-periwinkle-400 transition-colors duration-300 p-7'>
+      <ul className='h-12 items-center gap-2 sm:flex'>
+        <li className='hover:bg-periwinkle-400 flex h-12 items-center rounded-md p-7 transition-colors duration-300'>
           <Link href='/auth/login'>
-            <span className='text-white font-bold antialiased'>Inicio</span>
+            <span className='font-bold text-white antialiased'>Inicio</span>
           </Link>
         </li>
-        <li className='h-12 flex items-center rounded-md hover:bg-periwinkle-400 transition-colors duration-300'>
+        <li className='hover:bg-periwinkle-400 flex h-12 items-center rounded-md transition-colors duration-300'>
           <Link href='/movies'>
-            <span className='text-white font-bold antialiased'>Películas</span>
+            <span className='font-bold text-white antialiased'>Películas</span>
           </Link>
         </li>
-        <li className='h-12 flex items-center rounded-md hover:bg-periwinkle-400 transition-colors duration-300'>
+        <li className='hover:bg-periwinkle-400 flex h-12 items-center rounded-md transition-colors duration-300'>
           <Link
             href='/'
-            className='rounded-md hover:bg-periwinkle-400 transition-colors duration-300'
+            className='hover:bg-periwinkle-400 rounded-md transition-colors duration-300'
           >
-            <span className='text-white font-bold antialiased'>
+            <span className='font-bold text-white antialiased'>
               Pelis Top 10
             </span>
           </Link>
         </li>
-        <li className='h-12 flex items-center rounded-md hover:bg-periwinkle-400 transition-colors duration-300'>
+        <li className='hover:bg-periwinkle-400 flex h-12 items-center rounded-md transition-colors duration-300'>
           <Link
             href='/'
-            className='rounded-md hover:bg-periwinkle-400 transition-colors duration-300'
+            className='hover:bg-periwinkle-400 rounded-md transition-colors duration-300'
           >
-            <span className='text-white font-bold antialiased'>Series</span>
+            <span className='font-bold text-white antialiased'>Series</span>
           </Link>
         </li>
       </ul>
@@ -87,20 +87,20 @@ export default function TopMenu() {
 
       <label
         htmlFor='search'
-        className='block mb-2.5 text-sm font-medium text-heading sr-only '
+        className='text-heading sr-only mb-2.5 block text-sm font-medium'
       >
         Search
       </label>
       <div className='relative w-xs'>
-        <div className='absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none'>
+        <div className='pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3'>
           <Link href='/search'>
-            <IoSearchOutline className='h-5 w-5 ' />
+            <IoSearchOutline className='h-5 w-5' />
           </Link>
         </div>
         <input
           type='search'
           id='search'
-          className='block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body'
+          className='bg-neutral-secondary-medium border-default-medium text-heading rounded-base focus:ring-brand focus:border-brand placeholder:text-body block w-full border p-3 ps-9 text-sm shadow-xs'
           placeholder='Buscar películas, series...'
           onChange={(e) => {
             handleSearch(e.target.value)
@@ -109,7 +109,7 @@ export default function TopMenu() {
         />
         <button
           type='button'
-          className='absolute end-1.5 bottom-1.5 text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none'
+          className='bg-brand hover:bg-brand-strong focus:ring-brand-medium absolute end-1.5 bottom-1.5 box-border rounded border border-transparent px-3 py-1.5 text-xs leading-5 font-medium text-white shadow-xs focus:ring-4 focus:outline-none'
         >
           Search
         </button>
@@ -118,7 +118,7 @@ export default function TopMenu() {
         <li>
           <Button variant='secondary' size='icon' className='relative'>
             <IoPlay className='h-5 w-5' />
-            <span className='absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground'>
+            <span className='bg-primary text-primary-foreground absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold'>
               3
             </span>
           </Button>
