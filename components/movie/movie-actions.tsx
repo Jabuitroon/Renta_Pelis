@@ -20,16 +20,7 @@ export default function MovieActions({ movie }: Props) {
     if (inCart) {
       removeItem(movie.imdbID)
     } else {
-      addItem({
-        Title: movie.Title,
-        Year: movie.Year,
-        imdbID: movie.imdbID,
-        Type: movie.Type,
-        Poster: movie.Poster,
-        quality: movie.quality,
-        state: movie.state,
-        price: movie.price,
-      })
+      addItem(movie)
     }
   }
 
@@ -41,12 +32,12 @@ export default function MovieActions({ movie }: Props) {
     >
       {inCart ? (
         <>
-          <Check className='w-4 h-4' />
+          <Check className='h-4 w-4' />
           En el carrito
         </>
       ) : (
         <>
-          <Plus className='w-4 h-4' />
+          <Plus className='h-4 w-4' />
           Agregar al carrito
         </>
       )}

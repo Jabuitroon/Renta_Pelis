@@ -24,19 +24,19 @@ export const genreSlugMap: Record<string, Genres> = {
   thriller: 'Thriller',
 }
 
-// export default async function CategoryPage({ params }: Props) {
-//   const moviesToSearch = await fetchMovies({ query: params.id })
-//   const genre = genreSlugMap[params.id]
+export default async function CategoryPage({ params }: Props) {
+  const moviesToSearch = await fetchMovies({ query: params.id })
+  const genre = genreSlugMap[params.id]
 
-//   if (!genre) {
-//     notFound()
-//   }
+  if (!genre) {
+    notFound()
+  }
 
-//   const moviesToShow = moviesToSearch.filter((movie) => movie.Genre.includes(genre))
+  // const moviesToShow = moviesToSearch.filter((movie) => movie.Genre.includes(genre))
 
-//   return (
-//     <div className='flex flex-col w-full h-full overflow-y-auto scroll-smooth snap-y bg-accent-foreground font-sans dark:bg-gray-900'>
-//       <MoviesGrid header={`Películas de ${genre}`} movies={moviesToShow} />
-//     </div>
-//   )
-// }
+  return (
+    <div className='flex flex-col w-full h-full overflow-y-auto scroll-smooth snap-y bg-accent-foreground font-sans dark:bg-gray-900'>
+      <h2>Acá van las categorías</h2>
+    </div>
+  )
+}

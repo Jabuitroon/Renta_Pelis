@@ -1,6 +1,12 @@
 const key = 'a5be40fb'
 
-export async function fetchMovies({ query, page }: { query: string; page?: string }) {
+export async function fetchMovies({
+  query,
+  page,
+}: {
+  query: string
+  page?: string
+}) {
   const url = `https://www.omdbapi.com/?apikey=${key}&s=${query}&page=${page || '1'}`
 
   const res = await fetch(url, {
