@@ -38,20 +38,20 @@ export default function MoviesGrid({
       variants={listVariants}
       className='snap-start px-8 py-12'
     >
-      <motion.h2 className='text-white text-xl font-semibold mb-6'>
+      <motion.h2 className='mb-6 text-xl font-semibold text-white'>
         {header}
       </motion.h2>
-      <motion.ul className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+      <motion.ul className='grid grid-cols-2 gap-4 md:grid-cols-4'>
         {movies.map((_, i) => (
           <motion.li
             key={i}
-            className='aspect-video bg-white/5 rounded-md hover:ring-2 hover:ring-white/40 transition-all cursor-pointer'
+            className='aspect-video cursor-pointer rounded-md bg-white/5 transition-all hover:ring-2 hover:ring-white/40'
           >
             <Link href={`/movie/${movies[i]?.imdbID}`}>
               <motion.img
                 src={movies[i]?.Poster}
                 alt={movies[i]?.Title}
-                className='w-full h-full object-cover rounded-md'
+                className='h-full w-full rounded-md object-cover'
               />
             </Link>
             {movies[i]?.Title}
@@ -69,14 +69,14 @@ export default function MoviesGrid({
                 aria-label={`Go to previous page, page ${currentPage - 1}`}
                 aria-disabled='true'
                 tabIndex={-1}
-                className='inline-flex h-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+                className='border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
               >
                 Previous
               </Link>
             ) : (
               <span
                 aria-disabled='true'
-                className='inline-flex h-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium opacity-50 cursor-not-allowed'
+                className='border-input inline-flex h-9 cursor-not-allowed items-center justify-center rounded-md border px-3 text-sm font-medium opacity-50'
               >
                 Previous
               </span>
@@ -88,7 +88,7 @@ export default function MoviesGrid({
             <li>
               <Link
                 href={createPageURL(1)}
-                className='inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+                className='border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 min-w-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
               >
                 1
               </Link>
@@ -99,7 +99,7 @@ export default function MoviesGrid({
             <li>
               <span
                 aria-hidden='true'
-                className='flex h-9 min-w-9 items-center justify-center text-sm text-muted-foreground'
+                className='text-muted-foreground flex h-9 min-w-9 items-center justify-center text-sm'
               >
                 …
               </span>
@@ -111,7 +111,7 @@ export default function MoviesGrid({
             <span
               aria-current='page'
               aria-label={`Current page, page ${currentPage}`}
-              className='inline-flex h-9 min-w-9 items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground'
+              className='bg-primary text-primary-foreground inline-flex h-9 min-w-9 items-center justify-center rounded-md px-3 text-sm font-medium'
             >
               {currentPage}
             </span>
@@ -122,7 +122,7 @@ export default function MoviesGrid({
             <li>
               <span
                 aria-hidden='true'
-                className='flex h-9 min-w-9 items-center justify-center text-sm text-muted-foreground'
+                className='text-muted-foreground flex h-9 min-w-9 items-center justify-center text-sm'
               >
                 …
               </span>
@@ -134,7 +134,7 @@ export default function MoviesGrid({
             <li>
               <Link
                 href={createPageURL(totalPages)}
-                className='inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+                className='border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 min-w-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
               >
                 {totalPages}
               </Link>
@@ -147,14 +147,14 @@ export default function MoviesGrid({
               <Link
                 href={createPageURL(currentPage + 1)}
                 aria-label={`Go to next page, page ${currentPage + 1}`}
-                className='inline-flex h-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+                className='border-input hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
               >
                 Next
               </Link>
             ) : (
               <span
                 aria-disabled='true'
-                className='inline-flex h-9 items-center justify-center rounded-md border border-input px-3 text-sm font-medium opacity-50 cursor-not-allowed'
+                className='border-input inline-flex h-9 cursor-not-allowed items-center justify-center rounded-md border px-3 text-sm font-medium opacity-50'
               >
                 Next
               </span>

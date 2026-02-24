@@ -10,11 +10,15 @@ import { isDesktop } from '@/utils/isDesktop'
 import { useUiStore } from '@/store/ui/ui-store'
 import { Film } from 'lucide-react'
 import { Button } from '../button'
+import { useCartStore } from '@/store/cart.store'
 
 export default function TopMenu() {
   // Controladores de estado para el menú lateral
   const open = useUiStore((s) => s.openSideMenu)
   const toggle = useUiStore((s) => s.toggleSideMenu)
+
+  // Cart Items
+  const cartItems = useCartStore((s) => s.items)
 
   const handleEnter = useCallback(() => {
     if (isDesktop()) open()
@@ -117,10 +121,12 @@ export default function TopMenu() {
       <ul className='flex items-center gap-4'>
         <li>
           <Button variant='secondary' size='icon' className='relative'>
-            <IoPlay className='h-5 w-5' />
-            <span className='bg-primary text-primary-foreground absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold'>
-              3
-            </span>
+            <Link href='/cart'>
+              <IoPlay className='h-5 w-5' />
+              <span className='bg-primary text-primary-foreground absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold'>
+                {cartItems.length}
+              </span>
+            </Link>
           </Button>
         </li>
         <li
