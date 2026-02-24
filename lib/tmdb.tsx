@@ -1,4 +1,4 @@
-const key = 'a5be40fb'
+const key = process.env.NEXT_PUBLIC_MOVIE_API_KEY
 
 export async function fetchMovies({
   query,
