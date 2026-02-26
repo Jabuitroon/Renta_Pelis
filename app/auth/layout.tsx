@@ -4,7 +4,7 @@ export default function ShopLayout({
   children: React.ReactNode
 }>) {
   return (
-    <main className='flex min-h-screen items-center justify-center bg-gray-500 font-sans dark:bg-black'>
+    <main className='flex min-h-screen justify-center bg-background font-sans dark:bg-black'>
       {children}
     </main>
   )
