@@ -67,7 +67,7 @@ export function LoginForm() {
       subtitle='Inicia sesión para acceder a tu colección de películas y series'
       footerText='¿Nuevo en el estudio?'
       footerLinkText='Crea tu cuenta'
-      footerLinkHref='/register'
+      footerLinkHref='/auth/register'
     >
       <form
         className='flex flex-col gap-5'
