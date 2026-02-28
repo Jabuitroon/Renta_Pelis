@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/incompatible-library */
 'use client'
 
 import {
@@ -11,6 +10,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import { useState, useMemo } from 'react'
+import { signIn } from 'next-auth/react'
 // import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { AuthField, AuthFieldConfig } from './auth-field'
@@ -26,6 +26,8 @@ import { registerSchema, RegisterValues } from './validation-sh'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PasswordStrength } from './password-strength'
+import { authService } from '@/services/auth-service'
+import { useRouter } from 'next/navigation'
 
 const STEP_DEFINITIONS = [
   { label: 'Datos Iniciales', icon: User },
@@ -140,6 +142,9 @@ export function RegisterForm() {
   const [currentStep, setCurrentStep] = useState(0)
   const [showPassword, setShowPassword] = useState(false)
 
+  const router = useRouter()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -192,9 +197,43 @@ export function RegisterForm() {
   // Obtener el valor en tiempo real dentro de tu componente RegisterForm
   const passwordValue = watch('password')
 
-  const onSubmit = (data: RegisterValues) => {
-    console.log('🚀 Payload listo para POST:', JSON.stringify(data, null, 2))
-    // Aquí iría tu fetch('/api/register', { method: 'POST', body: JSON.stringify(data) })
+  const onSubmit = async (data: RegisterValues) => {
+    setIsSubmitting(true)
+    try {
+      const payload = {
+        name: data.name,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+        phone: data.phone,
+        country: data.countrySelector,
+        language: data.language,
+        authProvider: "LOCAL"
+        // terms: data.terms
+      }
+      // 1. Llamada a tu API en Render para crear el usuario
+      console.log('🚀 Payload listo para POST:', JSON.stringify(payload, null, 2))
+      await authService.register(payload)
+      // toast.success("Cuenta creada con éxito. Iniciando sesión...");
+
+      // 2. Login automático tras registro exitoso
+      // Esto hace que NextAuth guarde la cookie y el token de Render
+      const result = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      })
+
+      // if (result?.error) {
+      //   router.push('/auth/login') // Si falla el auto-login, al menos ya está registrado
+      // }
+    } catch (error) {
+      // El error ya viene formateado desde nuestro apiClient
+      console.log(error)
+      // toast.error(error.message || "Error al registrarse");
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
