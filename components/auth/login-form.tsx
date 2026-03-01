@@ -10,6 +10,11 @@ import { Label } from '@/components/ui/label'
 import { AuthLayout } from './auth-layout'
 import { SocialAuthButtons } from './social-auth-buttons'
 import { AuthField, AuthFieldConfig } from './auth-field'
+import { useForm } from 'react-hook-form'
+import { loginSchema, LoginValues } from './validation-sh'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { signIn } from 'next-auth/react'
+import router from 'next/router'
 
 const loginFields: AuthFieldConfig[] = [
   {
@@ -52,6 +57,15 @@ function PasswordToggle({
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginValues>({
+    resolver: zodResolver(loginSchema),
+    mode: 'onChange',
+  })
+
   const getFieldWithPasswordToggle = (
     field: AuthFieldConfig
   ): AuthFieldConfig => {
@@ -61,6 +75,30 @@ export function LoginForm() {
     return field
   }
 
+  const onSubmit = async (data: LoginValues, e?: React.BaseSyntheticEvent) => {
+    if (e) e.preventDefault()
+
+    console.log('1. Intentando signIn con:', data.email)
+
+    try {
+      const result = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      })
+
+      console.log('2. Resultado de NextAuth:', result) // 👈 Debería verse aquí
+
+      if (result?.error) {
+        console.log('3. Error detectado:', result.error)
+        // toast.error("Credenciales incorrectas");
+      } else {
+        router.push('/movies')
+      }
+    } catch (error) {
+      console.error('4. Error crítico en la llamada:', error)
+    }
+  }
   return (
     <AuthLayout
       title='Bienvenido al Set'
@@ -69,23 +107,24 @@ export function LoginForm() {
       footerLinkText='Crea tu cuenta'
       footerLinkHref='/auth/register'
     >
-      <form
-        className='flex flex-col gap-5'
-        onSubmit={(e) => e.preventDefault()}
-      >
-        {loginFields.map((field) => (
-          <div key={field.id} className='relative'>
-            <AuthField field={getFieldWithPasswordToggle(field)} />
-            {field.id === 'password' && (
-              <div className='absolute top-0 right-0'>
-                <PasswordToggle
-                  visible={showPassword}
-                  onToggle={() => setShowPassword(!showPassword)}
-                />
-              </div>
-            )}
-          </div>
-        ))}
+      <form className='flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
+        <AuthField
+          field={loginFields[0]}
+          {...register('email')}
+          error={errors.email?.message}
+        />
+
+        <AuthField
+          field={getFieldWithPasswordToggle(loginFields[1])}
+          {...register('password')}
+          error={errors.password?.message}
+        />
+        <div className='absolute top-0 right-0'>
+          <PasswordToggle
+            visible={showPassword}
+            onToggle={() => setShowPassword(!showPassword)}
+          />
+        </div>
 
         {/* Remember + Forgot */}
         <div className='flex items-center justify-between'>

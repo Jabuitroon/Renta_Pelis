@@ -19,4 +19,10 @@ export const registerSchema = z
     path: ['confirmPassword'], // El error aparecerá en este campo
   })
 
+export const loginSchema = z.object({
+  email: z.string().email('Email inválido'),
+  password: z.string().min(8, 'Mínimo 8 caracteres'),
+})
+
 export type RegisterValues = z.infer<typeof registerSchema>
+export type LoginValues = z.infer<typeof loginSchema>

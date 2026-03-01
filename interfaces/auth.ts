@@ -1,5 +1,3 @@
-// types/auth.ts
-
 // Lo que espero recibir del Backend tras un login/registro exitoso
 export interface AuthResponse {
   token: string

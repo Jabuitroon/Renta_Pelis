@@ -208,11 +208,14 @@ export function RegisterForm() {
         phone: data.phone,
         country: data.countrySelector,
         language: data.language,
-        authProvider: "LOCAL"
+        authProvider: 'LOCAL',
         // terms: data.terms
       }
       // 1. Llamada a tu API en Render para crear el usuario
-      console.log('🚀 Payload listo para POST:', JSON.stringify(payload, null, 2))
+      console.log(
+        '🚀 Payload listo para POST:',
+        JSON.stringify(payload, null, 2)
+      )
       await authService.register(payload)
       // toast.success("Cuenta creada con éxito. Iniciando sesión...");
 

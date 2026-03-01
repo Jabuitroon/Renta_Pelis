@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getSession } from 'next-auth/react'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/auth/api/[...nextauth]/route' // Ajusta la ruta
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
@@ -10,23 +8,21 @@ async function apiRequest<T>(
   options: RequestInit = {}
 ): Promise<T> {
   // 1. Obtener la sesión (Servidor o Cliente)
-  const isServer = typeof window === 'undefined'
-  const session = isServer
-    ? await getServerSession(authOptions)
-    : await getSession()
+  const session = await getSession()
 
   const config = {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...((session as any)?.user?.accessToken && {
-        Authorization: `Bearer ${(session as any).user.accessToken}`,
+      // 2. Inyectamos el token para que Render nos deje pasar
+      ...(session?.user?.accessToken && {
+        Authorization: `Bearer ${session.user.accessToken}`,
       }),
       ...options.headers,
     },
   }
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, config)
+  const response = await fetch(`${BASE_URL}${endpoint}`, config)  
 
   if (!response.ok) {
     const error = await response
@@ -42,4 +38,7 @@ export const apiClient = {
   get: <T>(url: string) => apiRequest<T>(url, { method: 'GET' }),
   post: <T>(url: string, body: any) =>
     apiRequest<T>(url, { method: 'POST', body: JSON.stringify(body) }),
+  put: <T>(url: string, body: any) =>
+    apiRequest<T>(url, { method: 'PUT', body: JSON.stringify(body) }),
+  delete: <T>(url: string) => apiRequest<T>(url, { method: 'DELETE' }),
 }
