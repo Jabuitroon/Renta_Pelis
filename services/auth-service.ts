@@ -15,6 +15,10 @@ export const authService = {
     return apiClient.post<AuthResponse>('/auth/register', data)
   },
 
+  orders: async (data: RegisterData): Promise<AuthResponse> => {
+    return apiClient.post<AuthResponse>('/orders', data)
+  },
+
   // Ejemplo de obtención de perfil (usando GET)
   //   getProfile: async (): Promise<any> => {
   //     return apiClient.get("/auth/profile");

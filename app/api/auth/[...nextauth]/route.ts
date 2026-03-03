@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 // Definimos las opciones fuera del handler para que sea más limpio (SOLID)
 const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`
-export const authOptions = {
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -40,12 +41,7 @@ export const authOptions = {
 
         // Si Render dice que todo ok, devolvemos el objeto user a NextAuth
         if (res.ok && user) {
-          return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            accessToken: user.access_token, // El token que viene de Render
-          }
+          return user
         }
 
         return null
@@ -53,27 +49,28 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    // 1. Persiste el token de Render en el JWT de NextAuth
     async jwt({ token, user }) {
       if (user) {
-        token.accessToken = user.accessToken
-        token.id = user.id
+        // Asumiendo que tu backend devuelve el token en la propiedad 'token' o 'accessToken'
+        // Aquí 'user' es el JSON de Render.
+        // Accedemos a la propiedad con el nombre real del backend.
+        token.accessToken = (user as any).access_token
       }
       return token
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.accessToken = token.accessToken
-        session.user.id = token.id
+      // Inyectar el token directamente en la raíz de la sesión
+      return {
+        ...session,
+        accessToken: token.accessToken,
       }
-      return session
     },
   },
   pages: {
     signIn: '/auth/login', // Tu página personalizada
   },
-}
-
-const handler = NextAuth(authOptions)
+})
 
 // Exportamos los métodos HTTP que NextAuth necesita
 export { handler as GET, handler as POST }

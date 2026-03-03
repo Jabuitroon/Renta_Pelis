@@ -4,9 +4,8 @@ import { JWT } from 'next-auth/jwt'
 declare module 'next-auth' {
   // Se extiende el objeto 'session' que devuelve useSession() y getSession()
   interface Session {
-    user: {
-      accessToken: string // <-- Aquí agregas el tipo de tu backend
-    } & DefaultSession['user']
+    accessToken: string // <-- Aquí agregas el tipo de tu backend
+    user: {} & DefaultSession['user']
   }
 
   // Se extiende el objeto 'user' que devuelve el authorize del Provider

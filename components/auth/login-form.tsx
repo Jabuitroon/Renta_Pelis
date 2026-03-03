@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { loginSchema, LoginValues } from './validation-sh'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
-import router from 'next/router'
+import { useRouter } from 'next/navigation'
 
 const loginFields: AuthFieldConfig[] = [
   {
@@ -55,6 +55,7 @@ function PasswordToggle({
 }
 
 export function LoginForm() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
 
   const {
@@ -93,7 +94,9 @@ export function LoginForm() {
         console.log('3. Error detectado:', result.error)
         // toast.error("Credenciales incorrectas");
       } else {
-        router.push('/movies')
+        console.log('¡Éxito! Redirigiendo...')
+        router.push('/') // O la ruta de tu home
+        router.refresh()
       }
     } catch (error) {
       console.error('4. Error crítico en la llamada:', error)

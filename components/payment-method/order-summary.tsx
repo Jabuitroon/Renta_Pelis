@@ -1,8 +1,9 @@
 'use client'
-
+import { useSession } from 'next-auth/react'
+import { apiClient } from '@/lib/api-client'
+import { useRouter } from 'next/navigation'
 import { MovieInCart } from '@/interfaces/movie'
 import { Button } from '../ui/button'
-import Link from 'next/link'
 
 interface OrderSummaryProps {
   movies: MovieInCart[]
@@ -10,13 +11,46 @@ interface OrderSummaryProps {
 }
 
 export function OrderSummary({ movies, total }: OrderSummaryProps) {
+  const { data: session, status } = useSession()
+  console.log('🔍 Estado actual de la sesión:', { status, session })
+  const router = useRouter()
+
+  const handleConfirmOrder = async () => {
+    if (!session?.accessToken) {
+      console.log('Debes iniciar sesión para realizar el pedido')
+
+      // toast.error('Debes iniciar sesión para realizar el pedido')
+      return
+    }
+
+    const orderData = {
+      items: [
+        {
+          imdbId: 'tt0133093',
+          type: 'RENT',
+          quality: 'p1080',
+        },
+      ],
+    }
+
+    try {
+      // Usamos el apiClient que ya maneja el Bearer Token automáticamente
+      const response = await apiClient.post('/orders', orderData)
+
+      console.log('¡Orden creada con éxito!, respuesta...', response)
+
+      router.push('/orders/my-orders') // O tu página de confirmación
+    } catch (error) {
+      console.error('Error al crear orden:', error)
+    }
+  }
   return (
-    <div className='p-6 rounded-xl shadow-xl w-full max-w-xl mx-auto h-full'>
-      <ul className='space-y-4 max-h-2/3 overflow-y-auto'>
+    <div className='mx-auto h-full w-full max-w-xl rounded-xl p-6 shadow-xl'>
+      <ul className='max-h-2/3 space-y-4 overflow-y-auto'>
         {movies.map((movie) => (
           <li
             key={movie.imdbID}
-            className='flex justify-between items-center border-b border-zinc-700 pb-3'
+            className='flex items-center justify-between border-b border-zinc-700 pb-3'
           >
             <div>
               <p className='text-accent-foreground font-medium'>
@@ -27,7 +61,7 @@ export function OrderSummary({ movies, total }: OrderSummaryProps) {
               </p>
             </div>
 
-            <span className='text-green-400 font-semibold'>
+            <span className='font-semibold text-green-400'>
               {movie.price.currency} {movie.price.amount.toLocaleString()}
             </span>
           </li>
@@ -35,16 +69,16 @@ export function OrderSummary({ movies, total }: OrderSummaryProps) {
       </ul>
 
       {/* TOTAL */}
-      <div className='flex justify-between items-center mt-6 text-lg font-bold text-accent-foreground'>
+      <div className='text-accent-foreground mt-6 flex items-center justify-between text-lg font-bold'>
         <span>Total</span>
         <span className='text-green-500'>COP {total.toLocaleString()}</span>
       </div>
       <Button
-        asChild
-        className='mt-6 w-full transition text-white py-2 rounded-lg'
+        onClick={handleConfirmOrder}
+        className='mt-6 w-full rounded-lg py-2 text-white transition'
         size='lg'
       >
-        <Link href='/orders/abc'>Confirmar Pago</Link>
+        Confirmar Pago
       </Button>
     </div>
   )

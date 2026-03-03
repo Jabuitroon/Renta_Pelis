@@ -1,7 +1,6 @@
 'use client'
 
 import { Controller, useForm } from 'react-hook-form'
-import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 // import { toast } from "sonner"
 
@@ -37,29 +36,7 @@ import { Input } from '@/components/ui/input'
 import CountrySelectByContinent from './selector-country'
 import { useUiStore } from '@/store/ui/ui-store'
 
-const onlyLetters = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(5, 'Ingresa un nombre mayor a 5 caracteres.')
-    .max(32, 'Ingresa un nombre menor a 32 caracteres.')
-    .regex(onlyLetters, 'El nombre no puede contener números ni símbolos'),
-  lastname: z
-    .string()
-    .min(5, 'Ingresa un apellido mayor a 5 caracteres.')
-    .max(32, 'Ingresa un apellido mayor a 5 caracteres.'),
-  address: z
-    .string()
-    .min(5, 'Address must be at least 20 characters.')
-    .max(100, 'Address must be at most 100 characters.'),
-  country: z.string().min(2, 'Selecciona un país'),
-  phone: z
-    .string()
-    .min(7, 'El teléfono es muy corto')
-    .max(15, 'El teléfono es muy largo')
-    .regex(/^\d+$/, 'Solo números'),
-})
+import { paymentMethodSchema, PaymentMethodValues } from './validation-sh'
 
 export default function PaymentCheckouttForm() {
   const setUser = useCheckoutStore((state) => state.setUser)
@@ -67,8 +44,8 @@ export default function PaymentCheckouttForm() {
   const lockCheckout = useUiStore((s) => s.lockCheckout)
   const unlockCheckout = useUiStore((s) => s.unlockCheckout)
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<PaymentMethodValues>({
+    resolver: zodResolver(paymentMethodSchema),
     defaultValues: {
       name: '',
       lastname: '',
@@ -78,8 +55,8 @@ export default function PaymentCheckouttForm() {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data)
+  function onSubmit(data: PaymentMethodValues) {
+    console.log('Formulario confirmado', data)
     setUser(data)
     lockCheckout()
     // toast("You submitted the following values:", {

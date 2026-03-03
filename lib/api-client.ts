@@ -15,14 +15,14 @@ async function apiRequest<T>(
     headers: {
       'Content-Type': 'application/json',
       // 2. Inyectamos el token para que Render nos deje pasar
-      ...(session?.user?.accessToken && {
-        Authorization: `Bearer ${session.user.accessToken}`,
+      ...(session?.accessToken && {
+        Authorization: `Bearer ${session.accessToken}`,
       }),
       ...options.headers,
     },
   }
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, config)  
+  const response = await fetch(`${BASE_URL}${endpoint}`, config)
 
   if (!response.ok) {
     const error = await response
