@@ -1,4 +1,4 @@
-export type OrderStatus = 'pagado' | 'pendiente'
+export type OrderStatus = 'PAID' | 'PENDING'
 
 export interface Order {
   orderId: string

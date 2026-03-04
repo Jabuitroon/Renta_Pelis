@@ -227,9 +227,9 @@ export function RegisterForm() {
         redirect: false,
       })
 
-      // if (result?.error) {
-      //   router.push('/auth/login') // Si falla el auto-login, al menos ya está registrado
-      // }
+      if (result?.error) {
+        router.push('/auth/login') // Si falla el auto-login, al menos ya está registrado
+      }
     } catch (error) {
       // El error ya viene formateado desde nuestro apiClient
       console.log(error)

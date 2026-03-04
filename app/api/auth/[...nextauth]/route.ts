@@ -49,6 +49,11 @@ export const authOptions = {
       },
     }),
   ],
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60, // 1 hora de duración (en segundos)
+    updateAge: 60 * 60, // Cada cuánto tiempo NextAuth actualiza la cookie
+  },
   callbacks: {
     // 1. Persiste el token de Render en el JWT de NextAuth
     async jwt({ token, user }) {
