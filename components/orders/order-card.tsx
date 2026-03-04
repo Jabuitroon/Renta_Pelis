@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { ChevronRight, Film } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -23,9 +22,11 @@ export function OrderCard({ order }: OrderCardProps) {
         <div className='border-border bg-secondary/30 flex flex-wrap items-center justify-between gap-3 border-b px-5 py-3'>
           <div className='flex items-center gap-4'>
             <span className='text-foreground font-mono text-sm font-semibold tracking-wide'>
-              {order.id}
+              {order.orderId}
             </span>
-            <span className='text-muted-foreground text-sm'>{order.date}</span>
+            <span className='text-muted-foreground text-sm'>
+              {order.createdAt}
+            </span>
           </div>
           <OrderStatusBadge status={order.status} />
         </div>
@@ -39,14 +40,7 @@ export function OrderCard({ order }: OrderCardProps) {
                 key={item.id}
                 className='border-card relative h-24 w-16 shrink-0 overflow-hidden rounded-md border-2 shadow-lg sm:h-28 sm:w-18'
                 style={{ zIndex: maxVisiblePosters - idx }}
-              >
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className='object-cover'
-                />
-              </div>
+              ></div>
             ))}
             {itemCount > maxVisiblePosters && (
               <div
@@ -69,7 +63,7 @@ export function OrderCard({ order }: OrderCardProps) {
                   key={item.id}
                   className='text-foreground truncate text-sm font-medium'
                 >
-                  {item.title}
+                  {item.movie.title}
                 </span>
               ))}
               {itemCount > 2 && (
@@ -88,21 +82,13 @@ export function OrderCard({ order }: OrderCardProps) {
                 <Film className='h-3 w-3' />
                 {itemCount} {itemCount === 1 ? 'título' : 'títulos'}
               </Badge>
-              {order.items.some((i) => i.format === '4K') && (
-                <Badge
-                  variant='secondary'
-                  className='text-secondary-foreground text-xs'
-                >
-                  4K UHD
-                </Badge>
-              )}
             </div>
           </div>
 
           {/* Price + action */}
           <div className='flex shrink-0 flex-col items-end gap-2'>
             <span className='text-primary text-xl font-bold sm:text-2xl'>
-              ${order.total.toFixed(2)}
+              ${order.totalAmount.toFixed(2)}
             </span>
             <Button
               variant='ghost'

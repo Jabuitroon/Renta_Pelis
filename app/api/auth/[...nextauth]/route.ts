@@ -4,7 +4,8 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 
 // Definimos las opciones fuera del handler para que sea más limpio (SOLID)
 const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`
-const handler = NextAuth({
+
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -70,7 +71,9 @@ const handler = NextAuth({
   pages: {
     signIn: '/auth/login', // Tu página personalizada
   },
-})
+}
+
+const handler = NextAuth(authOptions)
 
 // Exportamos los métodos HTTP que NextAuth necesita
 export { handler as GET, handler as POST }
