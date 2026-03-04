@@ -35,7 +35,11 @@ export function OrderSummary({ movies, total }: OrderSummaryProps) {
 
     try {
       // Usamos el apiClient que ya maneja el Bearer Token automáticamente
-      const response = await apiClient.post('/orders', orderData)
+      const response = await apiClient.post(
+        '/orders',
+        orderData,
+        session.accessToken
+      )
 
       console.log('¡Orden creada con éxito!, respuesta...', response)
 
