@@ -1,7 +1,7 @@
 'use client'
 
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -13,8 +13,8 @@ import { AuthField, AuthFieldConfig } from './auth-field'
 import { useForm } from 'react-hook-form'
 import { loginSchema, LoginValues } from './validation-sh'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { signIn, signOut } from 'next-auth/react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const loginFields: AuthFieldConfig[] = [
   {
@@ -46,7 +46,7 @@ function PasswordToggle({
     <button
       type='button'
       onClick={onToggle}
-      className='text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors'
+      className='text-muted-foreground hover:text-foreground transition-colors'
       aria-label={visible ? 'Ocultar contraseña' : 'Mostrar contraseña'}
     >
       {visible ? <EyeOff className='h-4 w-4' /> : <Eye className='h-4 w-4' />}
@@ -57,6 +57,17 @@ function PasswordToggle({
 export function LoginForm() {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
+
+  const searchParams = useSearchParams()
+  const error = searchParams.get('error')
+
+  useEffect(() => {
+    // Si llegamos aquí por un error de sesión,
+    // forzamos un logout local para limpiar cookies viejas
+    if (error === 'SessionExpired') {
+      signOut({ redirect: false })
+    }
+  }, [error])
 
   const {
     register,
@@ -117,12 +128,12 @@ export function LoginForm() {
           error={errors.email?.message}
         />
 
-        <AuthField
-          field={getFieldWithPasswordToggle(loginFields[1])}
-          {...register('password')}
-          error={errors.password?.message}
-        />
-        <div className='absolute top-0 right-0'>
+        <div className='relative'>
+          <AuthField
+            field={getFieldWithPasswordToggle(loginFields[1])}
+            {...register('password')}
+            error={errors.password?.message}
+          />
           <PasswordToggle
             visible={showPassword}
             onToggle={() => setShowPassword(!showPassword)}
@@ -158,6 +169,13 @@ export function LoginForm() {
       </form>
 
       <SocialAuthButtons />
+      <div>
+        {error === 'SessionExpired' && (
+          <p className='text-amber-500'>
+            Tu sesión anterior expiró. Identifícate de nuevo.
+          </p>
+        )}
+      </div>
     </AuthLayout>
   )
 }
