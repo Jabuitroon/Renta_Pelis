@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { JWT } from 'next-auth/jwt'
 
 // Definimos las opciones fuera del handler para que sea más limpio (SOLID)
 const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`
@@ -51,7 +52,7 @@ export const authOptions = {
   ],
   callbacks: {
     // 1. Persiste el token de Render en el JWT de NextAuth
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: JWT; user?: any }) {
       if (user) {
         // Asumiendo que tu backend devuelve el token en la propiedad 'token' o 'accessToken'
         // Aquí 'user' es el JSON de Render.
@@ -60,7 +61,7 @@ export const authOptions = {
       }
       return token
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: JWT }) {
       // Inyectar el token directamente en la raíz de la sesión
       return {
         ...session,
@@ -69,7 +70,7 @@ export const authOptions = {
     },
   },
   pages: {
-    signIn: '/auth/login', //
+    signIn: '/auth/login',
   },
 }
 
