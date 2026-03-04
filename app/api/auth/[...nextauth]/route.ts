@@ -39,7 +39,7 @@ export const authOptions = {
 
         const user = await res.json()
 
-        console.log('Respuesta del Backend:', user)
+        console.log('Respuesta del Backend como:', user)
 
         // Si Render dice que todo ok, devolvemos el objeto user a NextAuth
         if (res.ok && user) {
