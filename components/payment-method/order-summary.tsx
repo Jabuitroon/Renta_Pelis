@@ -10,6 +10,12 @@ interface OrderSummaryProps {
   total: number
 }
 
+type orderItems = {
+  imdbId: string
+  type: 'RENT' | 'BUY'
+  quality: 'p720' | 'p1080' | 'p4k'
+}
+
 export function OrderSummary({ movies, total }: OrderSummaryProps) {
   const { data: session, status } = useSession()
   console.log('🔍 Estado actual de la sesión:', { status, session })
@@ -24,13 +30,14 @@ export function OrderSummary({ movies, total }: OrderSummaryProps) {
     }
 
     const orderData = {
-      items: [
-        {
-          imdbId: 'tt0133093',
-          type: 'RENT',
-          quality: 'p1080',
-        },
-      ],
+      items: movies.map((movie) => {
+        return {
+          imdbId: movie.imdbID,
+          type: movie.state === 'Comprar' ? 'BUY' : 'RENT',
+          quality:
+            `p${movie.quality.replace('p', '')}` as orderItems['quality'],
+        }
+      }),
     }
 
     try {

@@ -10,7 +10,7 @@ export default function OrderPreview() {
   const getTotal = useCartStore((state) => state.getTotal)
 
   const totalToPay = getTotal()
-  console.log(items)
+  console.log('useCartStore items state',items)
 
   if (!user) {
     return (
