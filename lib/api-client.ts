@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 async function apiRequest<T>(
@@ -32,9 +34,9 @@ async function apiRequest<T>(
 export const apiClient = {
   get: <T>(url: string, token?: string) =>
     apiRequest<T>(url, { method: 'GET' }, token),
-  post: <T>(url: string, body: Record<string, unknown>, token?: string) =>
+  post: <T>(url: string, body: any, token?: string) =>
     apiRequest<T>(url, { method: 'POST', body: JSON.stringify(body) }, token),
-  put: <T>(url: string, body: Record<string, unknown>, token?: string) =>
+  put: <T>(url: string, body: any, token?: string) =>
     apiRequest<T>(url, { method: 'PUT', body: JSON.stringify(body) }, token),
   delete: <T>(url: string, token?: string) =>
     apiRequest<T>(url, { method: 'DELETE' }, token),
