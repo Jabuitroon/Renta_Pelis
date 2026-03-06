@@ -75,12 +75,12 @@ export function HeroStoreSection() {
         {/* Left: Copy */}
         <div className='flex flex-1 flex-col justify-center'>
           <h1 className='text-foreground text-4xl leading-tight font-bold tracking-tight text-balance md:text-5xl lg:text-6xl'>
-            Tienda de CineStudio
+            Tienda de MoviRent
           </h1>
           <p className='text-muted-foreground mt-6 max-w-lg text-lg leading-relaxed text-pretty'>
             Ya puedes alquilar o comprar las mejores peliculas, ya sean
             novedades o clasicos favoritos. No es obligatorio tener una
-            suscripcion a CineStudio.
+            suscripcion a MoviRent.
           </p>
           <div className='mt-10'>
             <Button

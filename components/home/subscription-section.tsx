@@ -43,14 +43,14 @@ function FeaturedPoster() {
     <div className='group relative h-full min-h-125 overflow-hidden rounded-lg lg:min-h-0'>
       <Image
         src='/home/home.png'
-        alt='CineStudio Original - El Misterio de Thornfield'
+        alt='MoviRent Original - El Misterio de Thornfield'
         fill
         className='object-cover transition-transform duration-700 group-hover:scale-105'
       />
       <div className='from-background via-background/30 absolute inset-0 bg-linear-to-t to-transparent' />
       <div className='absolute right-6 bottom-6 left-6'>
         <span className='bg-primary/90 text-primary-foreground inline-block rounded-sm px-3 py-1 text-xs font-bold tracking-wider uppercase'>
-          CineStudio Original
+          MoviRent Original
         </span>
         <h3 className='text-foreground mt-3 text-2xl leading-tight font-bold lg:text-3xl'>
           El Misterio de Thornfield
@@ -76,8 +76,8 @@ export function SubscriptionSection() {
           </h2>
           <p className='text-muted-foreground mt-6 max-w-md leading-relaxed text-pretty'>
             Disfruta de series y peliculas populares, asi como acceso
-            instantaneo a tu biblioteca digital por $24,900 COP/mes, o ahorra
-            44% con una suscripcion anual de $165,600 COP ($13,800 COP/mes)*.
+            instantaneo a tu biblioteca digital por $9,900 COP/mes, o ahorra
+            44% con una suscripcion anual de $65,500 COP ($5,550 COP/mes)*.
             Paga con tu tarjeta de credito o debito y comienza tu prueba gratis
             de 30 dias.
           </p>
@@ -95,7 +95,7 @@ export function SubscriptionSection() {
               variant='outline'
               className='border-foreground/80 text-foreground hover:bg-foreground hover:text-background rounded-sm bg-transparent px-8 py-6 text-base font-semibold transition-colors'
             >
-              Inicia tu prueba gratis por 30 dias
+              Crear cuenta
             </Button>
           </div>
         </div>

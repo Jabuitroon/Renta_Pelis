@@ -21,8 +21,8 @@ import { FeaturesSection } from "@/components/home/features-section"
 export default function Home() {
   return (
     <main className='bg-background min-h-screen'>
-      <HeroStoreSection />
       <SubscriptionSection />
+      <HeroStoreSection />
       <FeaturesSection />
     </main>
   )

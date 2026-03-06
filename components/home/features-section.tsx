@@ -12,13 +12,13 @@ const FEATURES: FeatureItem[] = [
     image: '/home/feature-watch.jpg',
     title: 'Ver en cualquier parte',
     description:
-      'Disfruta desde la web o con la aplicacion de CineStudio en tu telefono, tablet o ciertos Smart TV en hasta 3 dispositivos al mismo tiempo.',
+      'Disfruta desde la web o con la aplicacion de MoviRent en tu telefono, tablet o ciertos Smart TV en hasta 3 dispositivos al mismo tiempo.',
   },
   {
     image: '/home/feature-download.jpg',
     title: 'Descarga y disfruta',
     description:
-      'Disfruta de contenido sin conexion con la aplicacion CineStudio cuando descargues titulos en tu iPhone, iPad, tablet o dispositivo Android.',
+      'Disfruta de contenido sin conexion con la aplicacion MoviRent cuando descargues titulos en tu iPhone, iPad, tablet o dispositivo Android.',
   },
   {
     image: '/home/feature-save.jpg',
