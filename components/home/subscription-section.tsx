@@ -2,11 +2,12 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 
+// La carpeta public es el root
 const GRID_POSTERS = [
   { src: '/home/poster-10.jpg', alt: 'Batalla Final' },
   { src: '/home/poster-11.jpg', alt: 'Sonido Vivo' },
   { src: '/home/poster-3.jpg', alt: 'Ciudad Neon' },
-  { src: '/home/poster-5.jpg', alt: 'Amigos por Siempre' },
+  { src: '/home/featured.jpg', alt: 'Amigos por Siempre' },
   { src: '/home/poster-12.jpg', alt: 'El Hechicero' },
   { src: '/home/poster-1.jpg', alt: 'La Sombra del Director' },
   { src: '/home/poster-9.jpg', alt: 'Callejon Oscuro' },
@@ -41,7 +42,7 @@ function FeaturedPoster() {
   return (
     <div className='group relative h-full min-h-125 overflow-hidden rounded-lg lg:min-h-0'>
       <Image
-        src='/home/featured.jpg'
+        src='/home/home.png'
         alt='CineStudio Original - El Misterio de Thornfield'
         fill
         className='object-cover transition-transform duration-700 group-hover:scale-105'
