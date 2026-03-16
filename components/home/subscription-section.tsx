@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import Link from 'next/link'
 
 function FeaturedPoster() {
   return (
@@ -29,7 +30,7 @@ export function SubscriptionSection() {
         {/* Left: Login */}
         <div className='flex flex-1 flex-col justify-center px-6 lg:max-w-105'>
           <h2 className='text-foreground text-3xl leading-tight font-bold tracking-tight text-balance md:text-4xl lg:text-5xl'>
-            {'Peliculas, series y mucho mas'}
+            Peliculas, series y mucho más
           </h2>
           <p className='text-muted-foreground mt-6 max-w-md leading-relaxed text-pretty'>
             Disfruta de series y peliculas populares, asi como acceso
@@ -44,7 +45,7 @@ export function SubscriptionSection() {
               variant='outline'
               className='border-foreground/80 text-foreground hover:bg-foreground hover:text-background rounded-sm bg-transparent px-8 py-6 text-base font-semibold transition-colors'
             >
-              Iniciar sesion
+              <Link href='/auth/login'>Iniciar sesion</Link>
             </Button>
             <span className='text-muted-foreground text-center text-sm'>o</span>
             <Button
@@ -52,7 +53,7 @@ export function SubscriptionSection() {
               variant='outline'
               className='border-foreground/80 text-foreground hover:bg-foreground hover:text-background rounded-sm bg-transparent px-8 py-6 text-base font-semibold transition-colors'
             >
-              Crear cuenta
+              <Link href='/auth/register'>Crear cuenta</Link>
             </Button>
           </div>
         </div>

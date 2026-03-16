@@ -58,11 +58,6 @@ export default function TopMenu() {
         </Link>
       </div>
       <ul className='h-12 items-center gap-2 sm:flex'>
-        <li className='hover:bg-periwinkle-400 flex h-12 items-center rounded-md p-7 transition-colors duration-300'>
-          <Link href='/auth/login'>
-            <span className='font-bold text-white antialiased'>Inicio</span>
-          </Link>
-        </li>
         <li className='hover:bg-periwinkle-400 flex h-12 items-center rounded-md transition-colors duration-300'>
           <Link href='/movies'>
             <span className='font-bold text-white antialiased'>Películas</span>
