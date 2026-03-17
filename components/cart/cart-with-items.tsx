@@ -33,11 +33,11 @@ export default function CartWithItems({ cartItems, total }: Props) {
       <section className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
         {/* Page Title */}
         <div className='mb-8 flex items-center gap-4'>
-          <div className='flex h-12 w-12 items-center justify-center rounded-full bg-primary/10'>
-            <Ticket className='h-6 w-6 text-primary' />
+          <div className='bg-primary/10 flex h-12 w-12 items-center justify-center rounded-full'>
+            <Ticket className='text-primary h-6 w-6' />
           </div>
           <div>
-            <h1 className='text-2xl font-bold tracking-tight text-foreground sm:text-3xl'>
+            <h1 className='text-foreground text-2xl font-bold tracking-tight sm:text-3xl'>
               Tu Carrito de Pelis
             </h1>
             <p className='text-muted-foreground'>
@@ -54,19 +54,19 @@ export default function CartWithItems({ cartItems, total }: Props) {
               {cartItems.map((item, index) => (
                 <Card
                   key={item.imdbID}
-                  className='overflow-hidden border-border bg-card transition-all hover:border-primary/30'
+                  className='border-border bg-card hover:border-primary/30 overflow-hidden transition-all'
                 >
                   <CardContent className='p-0'>
                     <div className='flex gap-4 p-4'>
                       {/* Movie Poster */}
-                      <div className='relative aspect-2/3 w-24 shrink-0 overflow-hidden rounded-md bg-secondary sm:w-32'>
+                      <div className='bg-secondary relative aspect-2/3 w-24 shrink-0 overflow-hidden rounded-md sm:w-32'>
                         {/* Film strip decoration */}
-                        <div className='absolute left-0 top-0 z-10 h-full w-2 bg-background/80'>
+                        <div className='bg-background/80 absolute top-0 left-0 z-10 h-full w-2'>
                           <div className='flex h-full flex-col justify-around py-1'>
                             {Array.from({ length: 8 }).map((_, i) => (
                               <div
                                 key={i}
-                                className='mx-auto h-1 w-1 rounded-full bg-muted-foreground/30'
+                                className='bg-muted-foreground/30 mx-auto h-1 w-1 rounded-full'
                               />
                             ))}
                           </div>
@@ -77,7 +77,7 @@ export default function CartWithItems({ cartItems, total }: Props) {
                           className='object-cover'
                         />
 
-                        <Badge className='absolute bottom-2 right-2 bg-primary/90 text-[10px] text-primary-foreground'>
+                        <Badge className='bg-primary/90 text-primary-foreground absolute right-2 bottom-2 text-[10px]'>
                           {item.quality}
                         </Badge>
                       </div>
@@ -86,26 +86,26 @@ export default function CartWithItems({ cartItems, total }: Props) {
                       <div className='flex flex-1 flex-col justify-between'>
                         <div>
                           <div className='mb-1 flex items-start justify-between gap-2'>
-                            <h3 className='font-semibold text-card-foreground'>
+                            <h3 className='text-card-foreground font-semibold'>
                               {item.Type} : {item.Title}
                             </h3>
                             {/* Remover peli */}
                             <Button
                               variant='ghost'
                               size='icon-lg'
-                              className='h-8 w-8 shrink-0 text-muted-foreground hover:text-destructive'
+                              className='text-muted-foreground hover:text-destructive h-8 w-8 shrink-0'
                               onClick={() => removeItem(item.imdbID)}
                             >
                               <Trash2 className='h-4 w-4' />
                             </Button>
                           </div>
 
-                          <div className='mb-2 flex flex-wrap items-center gap-2 text-sm text-muted-foreground'>
+                          <div className='text-muted-foreground mb-2 flex flex-wrap items-center gap-2 text-sm'>
                             {item?.Genre.split(', ').map((genre) => (
                               <Badge
                                 key={genre}
                                 variant='outline'
-                                className='border-border bg-transparent text-muted-foreground'
+                                className='border-border text-muted-foreground bg-transparent'
                               >
                                 {genre}
                               </Badge>
@@ -113,7 +113,7 @@ export default function CartWithItems({ cartItems, total }: Props) {
                             <span>{item.Year}</span>
                           </div>
 
-                          <div className='flex items-center gap-1 text-xs text-muted-foreground'>
+                          <div className='text-muted-foreground flex items-center gap-1 text-xs'>
                             <Clock className='h-3 w-3' />
                             <span>Disponible inmediatamente</span>
                           </div>
@@ -132,7 +132,7 @@ export default function CartWithItems({ cartItems, total }: Props) {
                                 {/* onClick={() => updateQuantity(item.id, -1)} */}
                                 <Minus className='h-3 w-3' />
                               </Button>
-                              <span className='w-8 text-center font-medium text-card-foreground'>
+                              <span className='text-card-foreground w-8 text-center font-medium'>
                                 {item.days}
                               </span>
                               <Button
@@ -150,7 +150,7 @@ export default function CartWithItems({ cartItems, total }: Props) {
                             {/* <div className='text-lg font-bold text-primary'>
                                 ${(item.price.amount * item.quantity).toFixed(2)}
                               </div> */}
-                            <div className='text-lg font-bold text-primary'>
+                            <div className='text-primary text-lg font-bold'>
                               ${item.price.amount.toFixed(2)}
                             </div>
                           </div>
@@ -159,11 +159,11 @@ export default function CartWithItems({ cartItems, total }: Props) {
                     </div>
 
                     {/* Scene number decoration */}
-                    <div className='flex items-center gap-2 border-t border-border bg-secondary/30 px-4 py-2'>
-                      <div className='flex h-6 w-6 items-center justify-center rounded bg-primary/20 text-xs font-bold text-primary'>
+                    <div className='border-border bg-secondary/30 flex items-center gap-2 border-t px-4 py-2'>
+                      <div className='bg-primary/20 text-primary flex h-6 w-6 items-center justify-center rounded text-xs font-bold'>
                         {index + 1}
                       </div>
-                      <span className='text-xs uppercase tracking-wider text-muted-foreground'>
+                      <span className='text-muted-foreground text-xs tracking-wider uppercase'>
                         item {index + 1} de {cartItems.length}
                       </span>
                     </div>
@@ -174,7 +174,7 @@ export default function CartWithItems({ cartItems, total }: Props) {
 
             {/* Continue Shopping */}
             <div className='mt-6'>
-              <Button variant='ghost' className='gap-2 text-muted-foreground'>
+              <Button variant='ghost' className='text-muted-foreground gap-2'>
                 <Film className='h-4 w-4' />
                 Continuar explorando el catálogo
               </Button>
@@ -183,19 +183,19 @@ export default function CartWithItems({ cartItems, total }: Props) {
 
           {/* Order Summary */}
           <div className='lg:col-span-1'>
-            <Card className='sticky top-8 border-border bg-foreground'>
+            <Card className='border-border bg-foreground sticky top-8'>
               <CardContent className='p-6'>
                 {/* Clapperboard header */}
-                <div className='mb-6 flex items-center bg-chart-2 rounded-xl gap-3'>
+                <div className='bg-chart-2 mb-6 flex items-center gap-3 rounded-xl'>
                   <div className='relative ml-4'>
-                    <div className='h-8 w-16 rounded-t bg-primary' />
-                    <div className='flex h-6 w-16 items-center justify-center rounded-b bg-secondary'>
-                      <span className='text-[10px] font-bold uppercase tracking-wider text-muted-foreground'>
+                    <div className='bg-primary h-8 w-16 rounded-t' />
+                    <div className='bg-secondary flex h-6 w-16 items-center justify-center rounded-b'>
+                      <span className='text-muted-foreground text-[10px] font-bold tracking-wider uppercase'>
                         Total
                       </span>
                     </div>
                   </div>
-                  <h2 className='text-lg font-bold text-card-foreground'>
+                  <h2 className='text-card-foreground text-lg font-bold'>
                     Resumen tu orden
                   </h2>
                 </div>
@@ -227,13 +227,13 @@ export default function CartWithItems({ cartItems, total }: Props) {
                   </div>
                 </div>
 
-                <Separator className='my-4 bg-border' />
+                <Separator className='bg-border my-4' />
 
                 <div className='mb-6 flex justify-between'>
-                  <span className='text-lg font-semibold text-card-foreground'>
+                  <span className='text-card-foreground text-lg font-semibold'>
                     Total
                   </span>
-                  <span className='text-2xl font-bold text-primary'>
+                  <span className='text-primary text-2xl font-bold'>
                     ${total.toFixed(2)}
                   </span>
                 </div>
@@ -244,14 +244,14 @@ export default function CartWithItems({ cartItems, total }: Props) {
                   <ChevronRight className='h-4 w-4' />
                 </Button>
 
-                <p className='text-center text-xs text-muted-foreground'>
+                <p className='text-muted-foreground text-center text-xs'>
                   Pago seguro con encriptación de estudio
                 </p>
 
                 {/* Promo badge */}
                 {total < 40000 && (
-                  <div className='mt-4 rounded-lg border border-primary/30 bg-primary/5 p-3'>
-                    <p className='text-center text-xs text-primary'>
+                  <div className='border-primary/30 bg-primary/5 mt-4 rounded-lg border p-3'>
+                    <p className='text-primary text-center text-xs'>
                       Añade ${(40000 - total).toFixed(2)} más para obtener un
                       10% de descuento
                     </p>
@@ -278,9 +278,9 @@ export default function CartWithItems({ cartItems, total }: Props) {
               ].map((benefit, i) => (
                 <div
                   key={i}
-                  className='flex items-center gap-3 text-sm text-muted-foreground'
+                  className='text-muted-foreground flex items-center gap-3 text-sm'
                 >
-                  <benefit.icon className='h-4 w-4 text-primary' />
+                  <benefit.icon className='text-primary h-4 w-4' />
                   <span>{benefit.text}</span>
                 </div>
               ))}

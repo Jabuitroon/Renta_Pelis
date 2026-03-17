@@ -14,7 +14,8 @@ export const initialData = {
       Language: 'English, Japanese, French',
       Country: 'USA, UK',
       Awards: 'Won 4 Oscars. Another 152 wins & 204 nominations.',
-      Poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8MVhGmwl4Rt4Ed70KEHS6o8xr7WBweI610g&s',
+      Poster:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8MVhGmwl4Rt4Ed70KEHS6o8xr7WBweI610g&s',
       Ratings: [
         { Source: 'Internet Movie Database', Value: '8.8/10' },
         { Source: 'Rotten Tomatoes', Value: '87%' },
@@ -148,5 +149,50 @@ export const initialData = {
       rentState: 'unavailable',
     },
   ],
-  categories: ['Acción y Aventuras', 'Anime', 'Drama', 'Documental', 'Fantasía', 'Romance', 'Comedia', 'Horror','Niños', 'Ciencia ficción', 'Misterio', 'Thriller'],
+  categories: [
+    'Acción y Aventuras',
+    'Anime',
+    'Drama',
+    'Documental',
+    'Fantasía',
+    'Romance',
+    'Comedia',
+    'Horror',
+    'Niños',
+    'Ciencia ficción',
+    'Misterio',
+    'Thriller',
+  ],
+}
+
+export interface individualInfoMovie {
+  Title: 'The Avengers'
+  Year: '2012'
+  Rated: 'PG-13'
+  Released: '04 May 2012'
+  Runtime: '143 min'
+  Genre: 'Action, Sci-Fi'
+  Director: 'Joss Whedon'
+  Writer: 'Joss Whedon, Zak Penn'
+  Actors: 'Robert Downey Jr., Chris Evans, Scarlett Johansson'
+  Plot: "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity."
+  Language: 'English, Russian'
+  Country: 'United States'
+  Awards: 'Nominated for 1 Oscar. 40 wins & 81 nominations total'
+  Poster: 'https://m.media-amazon.com/images/M/MV5BNGE0YTVjNzUtNzJjOS00NGNlLTgxMzctZTY4YTE1Y2Y1ZTU4XkEyXkFqcGc@._V1_SX300.jpg'
+  Ratings: [
+    { Source: 'Internet Movie Database'; Value: '8.0/10' },
+    { Source: 'Rotten Tomatoes'; Value: '91%' },
+    { Source: 'Metacritic'; Value: '69/100' },
+  ]
+  Metascore: '69'
+  imdbRating: '8.0'
+  imdbVotes: '1,547,278'
+  imdbID: 'tt0848228'
+  Type: 'movie'
+  DVD: 'N/A'
+  BoxOffice: '$623,357,910'
+  Production: 'N/A'
+  Website: 'N/A'
+  Response: 'True'
 }

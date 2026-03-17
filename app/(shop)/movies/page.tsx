@@ -1,3 +1,4 @@
+import MoviePagination from '@/components/movies/products-grid/movie-pagination'
 import MoviesGrid from '@/components/movies/products-grid/MoviesGrid'
 import HeroCarousel from '@/components/ui/hero/hero-carousel'
 import { fetchMovies } from '@/lib/tmdb'
@@ -24,14 +25,11 @@ export default async function MoviesPage(props: {
   console.log('currentPage:', currentPage, 'pagesNeeded:', pagesNeeded)
 
   return (
-    <div className='w-full h-full overflow-y-auto scroll-smooth snap-y snap-mandatory bg-background font-sans dark:bg-gray-900'>
+    <div className='bg-background h-full w-full snap-y snap-mandatory overflow-y-auto scroll-smooth font-sans dark:bg-gray-900'>
       <HeroCarousel />
       <Suspense key={query + currentPage}>
-        <MoviesGrid
-          header='Available Movies'
-          movies={Search}
-          totalPages={pagesNeeded}
-        />
+        <MoviesGrid header='Available Movies' movies={Search} />
+        <MoviePagination totalPages={pagesNeeded} />
       </Suspense>
     </div>
   )

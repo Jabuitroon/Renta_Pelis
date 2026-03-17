@@ -39,6 +39,14 @@ export type Genres =
 export type RentState = 'available' | 'reserved' | 'unavailable'
 export type QualityOption = '720p' | '1080p' | '4k'
 
+export interface FetchingMovies {
+  imdbID: string
+  Title: string
+  Year: string
+  Type: string
+  Poster: string
+}
+
 export interface MovieInCart {
   Title: string
   Year: string
@@ -53,6 +61,6 @@ export interface MovieInCart {
 }
 
 type Money = {
-  amount: number   // entero
+  amount: number // entero
   currency: string
 }
