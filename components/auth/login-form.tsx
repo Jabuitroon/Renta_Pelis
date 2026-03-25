@@ -1,6 +1,6 @@
 'use client'
 
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -54,7 +54,7 @@ function PasswordToggle({
   )
 }
 
-export function LoginForm() {
+export function LoginForm({ isLoading, onLoadingChange }: { isLoading: boolean; onLoadingChange: (loading: boolean) => void }) {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
 
@@ -90,6 +90,8 @@ export function LoginForm() {
   const onSubmit = async (data: LoginValues, e?: React.BaseSyntheticEvent) => {
     if (e) e.preventDefault()
 
+    onLoadingChange(true)
+
     console.log('1. Intentando signIn con:', data.email)
 
     try {
@@ -111,6 +113,8 @@ export function LoginForm() {
       }
     } catch (error) {
       console.error('4. Error crítico en la llamada:', error)
+    } finally {
+      onLoadingChange(false)
     }
   }
   return (
@@ -162,9 +166,17 @@ export function LoginForm() {
         {/* Submit */}
         <Button
           type='submit'
-          className='bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25 mt-1 h-11 w-full font-semibold transition-all hover:shadow-md'
+          disabled={isLoading}
+          className='bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25 mt-1 h-11 w-full font-semibold transition-all hover:shadow-md disabled:cursor-not-allowed disabled:opacity-75'
         >
-          Entrar al Estudio
+          {isLoading ? (
+            <>
+              Verificando credenciales...
+              <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+            </>
+          ) : (
+            'Entrar al Estudio'
+          )}
         </Button>
       </form>
 

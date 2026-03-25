@@ -1,10 +1,7 @@
-import { Suspense } from 'react'
-import { LoginForm } from '@/components/auth/login-form'
+'use client'
+
+import { LoginFormWrapper } from './login-form-wrapper'
 
 export default function LoginPage() {
-  return (
-    <Suspense fallback={<div>Loader...</div>}>
-      <LoginForm />
-    </Suspense>
-  )
+  return <LoginFormWrapper />
 }
