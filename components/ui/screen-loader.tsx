@@ -1,17 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Film, Clapperboard, Coffee, Sparkles } from 'lucide-react'
+import { Film } from 'lucide-react'
 
 const CINEMA_TIPS = [
-  'Preparando los proyectores...',
-  'Ajustando las luces del set...',
-  'El director está revisando el guion...',
-  'Cargando los rollos de película...',
-  'Afinando el equipo de sonido...',
-  'El elenco está tomando posiciones...',
-  'Última revisión de vestuario...',
-  'Silencio en el set...',
+  'Preparando los proyectores',
+  'Ajustando las luces del set',
+  'El director está revisando el guion',
+  'Cargando los rollos de película',
+  'Afinando el equipo de sonido',
+  'El elenco está tomando posiciones',
+  'Última revisión de vestuario',
+  'Silencio en el set',
 ]
 
 interface ScreenLoaderProps {
@@ -41,20 +41,13 @@ export function ScreenLoader({
   return (
     <div className='bg-background/80 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm'>
       <div className='flex max-w-md flex-col items-center gap-6 px-6 text-center'>
-        {/* Logo animado */}
-        <div className='relative'>
-          <div className='bg-secondary flex h-20 w-20 items-center justify-center rounded-full'>
-            <Clapperboard className='text-primary h-10 w-10 animate-bounce' />
-          </div>
-        </div>
-
         {/* Titulo */}
         <div className='space-y-1'>
           <h2 className='text-foreground text-xl font-bold tracking-tight'>
-            {message}
+            {message} Despertando Servidor
           </h2>
           <p className='text-muted-foreground text-sm'>
-            El servicio de hosting es gratuito, esto tardará un poco...
+            El servicio de hosting es gratuito, esto tardará varios minutos...
           </p>
         </div>
 
@@ -69,18 +62,16 @@ export function ScreenLoader({
         </div>
 
         {/* Tips de Cine Dinámicos */}
-        <div className='border-border bg-card/50 flex min-h-[50px] w-full items-center justify-center gap-3 rounded-lg border px-4 py-2 text-sm transition-all duration-500'>
-          <Sparkles className='text-primary h-4 w-4 shrink-0 animate-pulse' />
+        <div className='border-border bg-card/50 flex min-h-12.5 w-full items-center justify-center gap-3 rounded-lg border px-4 py-2 text-sm transition-all duration-500'>
           <span className='text-muted-foreground italic transition-opacity duration-500'>
             {CINEMA_TIPS[tipIndex]}
           </span>
-        </div>
-
-        {/* Dots pulsing */}
-        <div className='flex gap-1'>
-          <div className='bg-primary/50 h-2 w-2 animate-pulse rounded-full delay-75' />
-          <div className='bg-primary/75 h-2 w-2 animate-pulse rounded-full delay-150' />
-          <div className='bg-primary h-2 w-2 animate-pulse rounded-full delay-300' />
+          {/* Dots pulsing */}
+          <div className='flex gap-1'>
+            <div className='bg-primary/50 h-2 w-2 animate-pulse rounded-full delay-75' />
+            <div className='bg-primary/75 h-2 w-2 animate-pulse rounded-full delay-150' />
+            <div className='bg-primary h-2 w-2 animate-pulse rounded-full delay-300' />
+          </div>
         </div>
       </div>
     </div>
