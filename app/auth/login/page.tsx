@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { LoginFormWrapper } from './login-form-wrapper'
+import { LoginFormWrapper } from '../../../components/ui/loader-wrapper/login-form-wrapper'
 
 export default function LoginPage() {
   return (

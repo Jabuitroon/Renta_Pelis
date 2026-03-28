@@ -8,6 +8,7 @@ import {
   Globe,
   Languages,
   ArrowRight,
+  Loader2,
 } from 'lucide-react'
 import { useState, useMemo } from 'react'
 import { signIn } from 'next-auth/react'
@@ -138,12 +139,17 @@ function buildPreferenceFields(): {
 }
 
 // Main Form
-export function RegisterForm() {
+export function RegisterForm({
+  isLoading,
+  onLoadingChange,
+}: {
+  isLoading: boolean
+  onLoadingChange: (loading: boolean) => void
+}) {
   const [currentStep, setCurrentStep] = useState(0)
   const [showPassword, setShowPassword] = useState(false)
 
   const router = useRouter()
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const {
     register,
@@ -197,8 +203,14 @@ export function RegisterForm() {
   // Obtener el valor en tiempo real dentro de tu componente RegisterForm
   const passwordValue = watch('password')
 
-  const onSubmit = async (data: RegisterValues) => {
-    setIsSubmitting(true)
+  const onSubmit = async (
+    data: RegisterValues,
+    e?: React.BaseSyntheticEvent
+  ) => {
+    if (e) e.preventDefault()
+
+    onLoadingChange(true)
+
     try {
       const payload = {
         name: data.name,
@@ -229,13 +241,17 @@ export function RegisterForm() {
 
       if (result?.error) {
         router.push('/auth/login') // Si falla el auto-login, al menos ya está registrado
+      } else {
+        console.log('¡Éxito! Redirigiendo...')
+        router.push('/') // O la ruta de tu home
+        router.refresh()
       }
     } catch (error) {
       // El error ya viene formateado desde nuestro apiClient
       console.log(error)
       // toast.error(error.message || "Error al registrarse");
     } finally {
-      setIsSubmitting(false)
+      onLoadingChange(false)
     }
   }
 
@@ -337,8 +353,19 @@ export function RegisterForm() {
               Siguiente <ArrowRight className='h-4 w-4' />
             </Button>
           ) : (
-            <Button type='submit' className='flex-1' disabled={!isValid}>
-              Crear mi Cuenta
+            <Button
+              type='submit'
+              className='flex-1'
+              disabled={!isValid && !isLoading}
+            >
+              {isLoading ? (
+                <>
+                  Verificando credenciales...
+                  <Loader2 className='ml-2 h-4 w-4 animate-spin' />
+                </>
+              ) : (
+                'Crear cuenta'
+              )}
             </Button>
           )}
         </div>
